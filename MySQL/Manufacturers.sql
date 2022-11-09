@@ -135,6 +135,80 @@ select name,price*100 "Centss" from products;
 | Printer    |   270 |
 +------------+-------+
 
+1.10  select * from products inner join manufacturers on products.manufacturer=manufacturers.code;
++------+-----------------+-------+--------------+-------+------+-----------------+
+| Code | NAME            | Price | Manufacturer | Cents | Code | NAME            |
++------+-----------------+-------+--------------+-------+------+-----------------+
+|    1 | Hard Drive      | 194.4 |            5 | 24000 |    5 | Fujitsu         |
+|    2 | Memory          |   108 |            6 | 12000 |    6 | winchester      |
+|    3 | Zip drive       | 121.5 |            4 | 15000 |    4 | Lomega          |
+|    4 | Floppy disk     |   4.5 |            6 |   500 |    6 | winchester      |
+|    5 | Monitor         | 194.4 |            1 | 24000 |    1 | Sony            |
+|    6 | DVD drive       | 145.8 |            2 | 18000 |    2 | Creative Labs   |
+|    7 | CD drive        |    81 |            2 |  9000 |    2 | Creative Labs   |
+|    8 | laser-Printer   | 218.7 |            3 | 27000 |    3 | Hewlett-Packard |
+|    9 | Toner cartridge |  59.4 |            3 |  6600 |    3 | Hewlett-Packard |
+|   10 | DVD burner      | 145.8 |            2 | 18000 |    2 | Creative Labs   |
+|   11 | Loudspeakers    |    63 |            2 |   700 |    2 | Creative Labs   |
++------+-----------------+-------+--------------+-------+------+-----------------+
+
+1.11  select products.code,products.name,manufacturers.name,products.price from products inner join manufacturers on products.manufacturer=manufacturers.code;
++------+-----------------+-----------------+-------+
+| code | name            | name            | price |
++------+-----------------+-----------------+-------+
+|    1 | Hard Drive      | Fujitsu         | 194.4 |
+|    2 | Memory          | winchester      |   108 |
+|    3 | Zip drive       | Lomega          | 121.5 |
+|    4 | Floppy disk     | winchester      |   4.5 |
+|    5 | Monitor         | Sony            | 194.4 |
+|    6 | DVD drive       | Creative Labs   | 145.8 |
+|    7 | CD drive        | Creative Labs   |    81 |
+|    8 | laser-Printer   | Hewlett-Packard | 218.7 |
+|    9 | Toner cartridge | Hewlett-Packard |  59.4 |
+|   10 | DVD burner      | Creative Labs   | 145.8 |
+|   11 | Loudspeakers    | Creative Labs   |    63 |
++------+-----------------+-----------------+-------+
+
+1.12 select  manufacturers.code from manufacturers inner join products on manufacturers.code=products.manufacturer where price=(SELECT AVG(Price) FROM Products);
++------+
+| code |
++------+
+|    4 |
++------+
+
+1.13 select  manufacturers.name from products inner join manufacturers on manufacturers.code=products.manufacturer where price=(SELECT AVG(Price) FROM Products);
++--------+
+| name   |
++--------+
+| Lomega |
++--------+
+
+1.14 select manufacturers.name from manufacturers inner join products on products.manufacturer=manufacturers.code where Price > (SELECT AVG(Price) FROM Products) or price=150;
++-----------------+
+| name            |
++-----------------+
+| Fujitsu         |
+| Sony            |
+| Creative Labs   |
+| Hewlett-Packard |
+| Creative Labs   |
++-----------------+
+
+1.15 select manufacturers.name,Products.name,products.price from manufacturers inner join products on products.manufacturer=manufacturers.code where price=(select min(price) from products);
++------------+-------------+-------+
+| name       | name        | price |
++------------+-------------+-------+
+| winchester | Floppy disk |   4.5 |
++------------+-------------+-------+
+
+1.16 select manufacturers.name,Products.name,products.price from manufacturers inner join products on products.manufacturer=manufacturers.code where price=(select max(price) from products);
++-----------------+---------------+-------+
+| name            | name          | price |
++-----------------+---------------+-------+
+| Hewlett-Packard | laser-Printer | 218.7 |
++-----------------+---------------+-------+
+
+
 1.17 insert into products values(11,"Loudspeakers",70,2,700);
      select * from products;
 +------+-----------------+-------+--------------+-------+
