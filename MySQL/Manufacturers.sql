@@ -30,7 +30,8 @@ insert into products values(8,"Printer",270,3);
 insert into products values(9,"Toner cartridge",66,3);
 insert into products values(10,"DVD burner",180,2);
 
-1.1 select name from products;
+--1.1 Select the names of all the products in the store.
+select name from products;
 +-----------------+
 | name            |
 +-----------------+
@@ -47,7 +48,8 @@ insert into products values(10,"DVD burner",180,2);
 +-----------------+
 
 
-1.2 select name,price from products;
+--1.2 Select the names and the prices of all the products in the store.
+select name,price from products;
 +-----------------+-------+
 | name            | price |
 +-----------------+-------+
@@ -63,7 +65,8 @@ insert into products values(10,"DVD burner",180,2);
 | DVD burner      |   180 |
 +-----------------+-------+
 
-1.3 select name,price from products where price<=200;
+--1.3 Select the name of the products with a price less than or equal to $200.
+select name,price from products where price<=200;
 +-----------------+-------+
 | name            | price |
 +-----------------+-------+
@@ -76,7 +79,8 @@ insert into products values(10,"DVD burner",180,2);
 | DVD burner      |   180 |
 +-----------------+-------+
 
-1.4 select * from products where price between 60 and 120;
+--1.4 Select all the products with a price between $60 and $120.
+select * from products where price between 60 and 120;
 +------+-----------------+-------+--------------+
 | Code | NAME            | Price | Manufacturer |
 +------+-----------------+-------+--------------+
@@ -85,7 +89,8 @@ insert into products values(10,"DVD burner",180,2);
 |    9 | Toner cartridge |    66 |            3 |
 +------+-----------------+-------+--------------+
 
-1.5 alter table products add column Cents real;
+--1.5 Select the name and price in cents (i.e., the price must be multiplied by 100).
+alter table products add column Cents real;
 update products set Cents=price*100;
 select name,price*100 "Centss" from products;
 +-----------------+--------+
@@ -103,28 +108,32 @@ select name,price*100 "Centss" from products;
 | DVD burner      |  18000 |
 +-----------------+--------+
 
-1.6 select avg(Price) from products;
+--1.6 Compute the average price of all the products.
+select avg(Price) from products;
 +------------+
 | avg(Price) |
 +------------+
 |      154.1 |
 +------------+
 
-1.7 select avg(Price) from products where Manufacturer = 2 ;
+--1.7 Compute the average price of all products with manufacturer code equal to 2.
+select avg(Price) from products where Manufacturer = 2 ;
 +------------+
 | avg(Price) |
 +------------+
 |        150 |
 +------------+
 
-1.8 select count(name) from products where price>=180;
+--1.8 Compute the number of products with a price larger than or equal to $180.
+select count(name) from products where price>=180;
 +-------------+
 | count(name) |
 +-------------+
 |           5 |
 +-------------+
 
-1.9 select name,price from products where price>=180 order by price;
+--1.9 Select the name and price of all products with a price larger than or equal to $180, and sort first by price (in descending order), and then by name (in ascending order).
+select name,price from products where price>=180 order by price;
 +------------+-------+
 | name       | price |
 +------------+-------+
@@ -134,8 +143,19 @@ select name,price*100 "Centss" from products;
 | Monitor    |   240 |
 | Printer    |   270 |
 +------------+-------+
+select name,price from products where price>=180 order by price desc;
++------------+-------+
+| name       | price |
++------------+-------+
+| Printer    |   270 |
+| Hard Drive |   240 |
+| Monitor    |   240 |
+| DVD drive  |   180 |
+| DVD burner |   180 |
++------------+-------+
 
-1.10  select * from products inner join manufacturers on products.manufacturer=manufacturers.code;
+--1.10  Select all the data from the products, including all the data for each product's manufacturer.
+select * from products inner join manufacturers on products.manufacturer=manufacturers.code;
 +------+-----------------+-------+--------------+-------+------+-----------------+
 | Code | NAME            | Price | Manufacturer | Cents | Code | NAME            |
 +------+-----------------+-------+--------------+-------+------+-----------------+
@@ -152,7 +172,8 @@ select name,price*100 "Centss" from products;
 |   11 | Loudspeakers    |    63 |            2 |   700 |    2 | Creative Labs   |
 +------+-----------------+-------+--------------+-------+------+-----------------+
 
-1.11  select products.code,products.name,manufacturers.name,products.price from products inner join manufacturers on products.manufacturer=manufacturers.code;
+--1.11  Select the product name, price, and manufacturer name of all the products.
+select products.code,products.name,manufacturers.name,products.price from products inner join manufacturers on products.manufacturer=manufacturers.code;
 +------+-----------------+-----------------+-------+
 | code | name            | name            | price |
 +------+-----------------+-----------------+-------+
@@ -169,39 +190,56 @@ select name,price*100 "Centss" from products;
 |   11 | Loudspeakers    | Creative Labs   |    63 |
 +------+-----------------+-----------------+-------+
 
-1.12 select  manufacturers.code from manufacturers inner join products on manufacturers.code=products.manufacturer where price=(SELECT AVG(Price) FROM Products);
-+------+
-| code |
-+------+
-|    4 |
-+------+
+--1.12 Select the average price of each manufacturer's products, showing only the manufacturer's code.
+select avg(price),b.code from products a,manufacturers b where b.code=a.manufacturer group by b.code;
++--------------------+------+
+| avg(price)         | code |
++--------------------+------+
+|              194.4 |    1 |
+|              108.9 |    2 |
+| 139.04999999999998 |    3 |
+|              121.5 |    4 |
+|              194.4 |    5 |
+|              56.25 |    6 |
++--------------------+------+
 
-1.13 select  manufacturers.name from products inner join manufacturers on manufacturers.code=products.manufacturer where price=(SELECT AVG(Price) FROM Products);
-+--------+
-| name   |
-+--------+
-| Lomega |
-+--------+
+--1.13 Select the average price of each manufacturer's products, showing the manufacturer's name.
+select avg(price),b.name from products a,manufacturers b where b.code=a.manufacturer group by b.name;
++--------------------+-----------------+
+| avg(price)         | name            |
++--------------------+-----------------+
+|              194.4 | Sony            |
+|              108.9 | Creative Labs   |
+| 139.04999999999998 | Hewlett-Packard |
+|              121.5 | Lomega          |
+|              194.4 | Fujitsu         |
+|              56.25 | winchester      |
++--------------------+-----------------+
 
-1.14 select manufacturers.name from manufacturers inner join products on products.manufacturer=manufacturers.code where Price > (SELECT AVG(Price) FROM Products) or price=150;
-+-----------------+
-| name            |
-+-----------------+
-| Fujitsu         |
-| Sony            |
-| Creative Labs   |
-| Hewlett-Packard |
-| Creative Labs   |
-+-----------------+
+--1.14 Select the names of manufacturer whose products have an average price larger than or equal to $150.
+select avg(a.price),b.name from products a,manufacturers b where b.code=a.manufacturer group by b.name having avg(price)>=150;
+select manufacturers.name from manufacturers inner join products on products.manufacturer=manufacturers.code where Price > (SELECT AVG(Price) FROM Products) or price=150;
++------------+---------+
+| avg(price) | name    |
++------------+---------+
+|      194.4 | Sony    |
+|      194.4 | Fujitsu |
++------------+---------+
 
-1.15 select manufacturers.name,Products.name,products.price from manufacturers inner join products on products.manufacturer=manufacturers.code where price=(select min(price) from products);
+--1.15 Select the name and price of the cheapest product.
+select name , price from products where  price = (select min(price) from products);
+select b.name,a.name,a.price from product a,manufacturers b where a.manufacturer=b.code and price = (select min(price) from products);
+
 +------------+-------------+-------+
 | name       | name        | price |
 +------------+-------------+-------+
 | winchester | Floppy disk |   4.5 |
 +------------+-------------+-------+
 
-1.16 select manufacturers.name,Products.name,products.price from manufacturers inner join products on products.manufacturer=manufacturers.code where price=(select max(price) from products);
+--1.16 Select the name of each manufacturer along with the name and price of its most expensive product.
+select name , price from products where  price = (select min(price) from products); 
+select b.name,a.name,a.price from products a,manufacturers b  where  a.Manufacturer=b.code group by b.name having max(price)=(select max(price) from products);
+
 +-----------------+---------------+-------+
 | name            | name          | price |
 +-----------------+---------------+-------+
@@ -209,8 +247,9 @@ select name,price*100 "Centss" from products;
 +-----------------+---------------+-------+
 
 
-1.17 insert into products values(11,"Loudspeakers",70,2,700);
-     select * from products;
+--1.17 Add a new product: Loudspeakers, $70, manufacturer 2.
+insert into products values(11,"Loudspeakers",70,2,700);
+select * from products;
 +------+-----------------+-------+--------------+-------+
 | Code | NAME            | Price | Manufacturer | Cents |
 +------+-----------------+-------+--------------+-------+
@@ -227,8 +266,9 @@ select name,price*100 "Centss" from products;
 |   11 | Loudspeakers    |    70 |            2 |   700 |
 +------+-----------------+-------+--------------+-------+
 
-1.18 update products set name="laser-Printer" where code=8;
-     select * from products;
+--1.18 Update the name of product 8 to "Laser Printer".
+update products set name="laser-Printer" where code=8;
+select * from products;
 +------+-----------------+-------+--------------+-------+
 | Code | NAME            | Price | Manufacturer | Cents |
 +------+-----------------+-------+--------------+-------+
@@ -245,8 +285,11 @@ select name,price*100 "Centss" from products;
 |   11 | Loudspeakers    |    70 |            2 |   700 |
 +------+-----------------+-------+--------------+-------+
 
-1.19 update products set price=(price-(price*10)/100);
-     select * from products;
+--1.19 Apply a 10% discount to all products.
+select name,(price-(price*10)/100) "10% discount" from products;
+update products set price=(price-(price*10)/100);
+
+select * from products;
 +------+-----------------+-------+--------------+-------+
 | Code | NAME            | Price | Manufacturer | Cents |
 +------+-----------------+-------+--------------+-------+
@@ -263,8 +306,10 @@ select name,price*100 "Centss" from products;
 |   11 | Loudspeakers    |    63 |            2 |   700 |
 +------+-----------------+-------+--------------+-------+
 
-1.20 update products set price=(price-(price*10)/100) where price>=120;
-     select * from products;
+--1.20 Apply a 10% discount to all products with a price larger than or equal to $120.
+select name,(price-(price*10)/100) "10% discount" from products where price>=120;
+update products set price=(price-(price*10)/100) where price>=120;
+select * from products;
 +------+-----------------+-------+--------------+-------+
 | Code | NAME            | Price | Manufacturer | Cents |
 +------+-----------------+-------+--------------+-------+
