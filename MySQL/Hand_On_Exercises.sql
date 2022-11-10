@@ -74,14 +74,24 @@ D. Find out the total of all the billed orders for month of 10.
     create or replace view HOE091122_1_D as
     select CLIENTNO,SALESMANNO,BILLYN,DELYDATE,ORDERSTATUS
     from SALES_ORDER
-    where BILLYN="Y" and MONTH(DELYDATE)=10;
+    where BILLYN="Y" and MONTH(ORDERDATE)=10;
+
+    select so.ORDERDATE,sum(sod.QTYORDERED) as "Total"
+    from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
+    where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
+    and 10=(MONTH(so.ORDERDATE))
+    group by so.ORDERDATE;
+
 
     create or replace view HOE091122_1_D as
-    select ORDERNO,CLIENTNO,SALESMANNO,BILLYN,DELYDATE,ORDERSTATUS
-    from SALES_ORDER
-    where  BILLYN="Y"
-    group by CLIENTNO
-    having 10=(MONTH(DELYDATE));
+    select SALES_ORDER.ORDERDATE,sum(SALES_ORDER_DETAILS.QTYORDERED)
+    from (((product_master
+    inner join  SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno)
+    inner join sales_order on  SALES_ORDER_DETAILS.orderno = sales_order.orderno)
+    inner join client_master on  sales_order.Clientno = client_master.Clientno )
+    where  sales_order.BILLYN="Y"
+    group by SALES_ORDER.ORDERDATE
+    having 10=(MONTH(sales_order.DELYDATE));
 
     select * from HOE091122_1_D;
    
@@ -112,6 +122,25 @@ A. Find out the Product, which have been sold to "Ivan Bayross".
     where client_master.name =  "Ivan"  ; 
 
     select * from HOE091122_2_A;
+
+    +----------+------+---------+-----------+
+    | Clientno | Name | orderno | PRODUCTNO |
+    +----------+------+---------+-----------+
+    | C00001   | Ivan | O00001  | P00001    |
+    | C00001   | Ivan | O00001  | P07965    |
+    | C00001   | Ivan | O00001  | P07885    |
+    | C00001   | Ivan | O00001  | P00001    |
+    | C00001   | Ivan | O00001  | p07868    |
+    | C00001   | Ivan | O00001  | P07885    |
+    | C00001   | Ivan | O00001  | P00001    |
+    | C00001   | Ivan | O00001  | P03453    |
+    | C00001   | Ivan | O00001  | P03453    |
+    | C00001   | Ivan | O00001  | P06734    |
+    | C00001   | Ivan | O00001  | P07965    |
+    | C00001   | Ivan | O00001  | P07975    |
+    | C00001   | Ivan | O00001  | P00001    |
+    | C00001   | Ivan | O00001  | P07975    |
+    +----------+------+---------+-----------+
 
 B. Find out the products and their quantities that will have to be delivered in current month.
 
@@ -154,15 +183,26 @@ B. Find out the products and their quantities that will have to be delivered in 
 
 C. List the Productno and description of constantly sold(I.E rapidly moving) products.
 
-   select product_master.productno,product_master.Description 
-   from  ((product_master 
-   inner join SALES_ORDER_DETAILS on product_master.productno=SALES_ORDER_DETAILS.PRODUCTNO)
-   inner join sales_order on SALES_ORDER.orderno=SALES_ORDER_DETAILS.orderno)
-   where  ; 
+   create or replace view HOE091122_2_C as
+   select product_master.productno,product_master.Description,SALES_ORDER_DETAILS.QTYORDERED
+   from product_master
+   inner join SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno
+   where SALES_ORDER_DETAILS.QTYORDERED =(select max(QTYORDERED) from SALES_ORDER_DETAILS); 
+
+    select * from HOE091122_2_C;
+   
+   +-----------+-------------+------------+
+   | productno | Description | QTYORDERED |
+   +-----------+-------------+------------+
+   | P07975    | 1.44 Drive  |         14 |
+   +-----------+-------------+------------+
+
+   
 
 
 D. Find the name of client who have purchased "Trousers";
 
+   create or replace view HOE091122_2_D as
    select client_master.name 
    from (((client_master
    inner join sales_order on  sales_order.Clientno = client_master.Clientno )
@@ -170,13 +210,23 @@ D. Find the name of client who have purchased "Trousers";
    inner join product_master on product_master.productno = SALES_ORDER_DETAILS.productno)
    where product_master.description = "Monitors";
 
+   select * from HOE091122_2_D;
 
+   create or replace view HOE091122_2_D as
    select client_master.name ,product_master.productno
    from (((product_master
    inner join  SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno)
    inner join sales_order on  SALES_ORDER_DETAILS.orderno = sales_order.orderno)
    inner join client_master on  sales_order.Clientno = client_master.Clientno )
    where product_master.description = "Monitors";
+  
+  
+    select c.Name,p.productno
+    from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
+    where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
+    and p.description = "Monitors"; 
+
+   select * from HOE091122_2_D;
 
    +------+-----------+
    | name | productno |
@@ -185,5 +235,99 @@ D. Find the name of client who have purchased "Trousers";
    | Ivan | P03453    |
    +------+-----------+
 
+
+E. List the products and orders from customers who have ordered less than 5 unit of "Pull Overs".
+
+create or replace view HOE091122_2_E as
+select product_master.Productno ,product_master.Description,client_master.Clientno,client_master.name,SALES_ORDER_DETAILS.QTYORDERED as "Pull Over"
+from (((product_master
+inner join  SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno)
+inner join sales_order on  SALES_ORDER_DETAILS.orderno = sales_order.orderno)
+inner join client_master on  sales_order.Clientno = client_master.Clientno )
+where SALES_ORDER_DETAILS.QTYORDERED<5;
+
+   select * from HOE091122_2_E;
+
+   +-----------+--------------+----------+------+-----------+
+   | Productno | Description  | Clientno | name | Pull Over |
+   +-----------+--------------+----------+------+-----------+
+   | P00001    | 1.44floppies | C00001   | Ivan |         1 |
+   | P07965    | 540 HDD      | C00001   | Ivan |         2 |
+   | P07885    | CD Drive     | C00001   | Ivan |         3 |
+   | P00001    | 1.44floppies | C00001   | Ivan |         4 |
+   +-----------+--------------+----------+------+-----------+
+
+
+F. Find the product and their quantities for the orders placed by "Iven" and "Ravi"
+
+  create or replace view HOE091122_2_F as
+  select product_master.Productno ,product_master.Description,client_master.Clientno,client_master.name,SALES_ORDER_DETAILS.QTYORDERED 
+  from (((product_master
+  inner join  SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno)
+  inner join sales_order on  SALES_ORDER_DETAILS.orderno = sales_order.orderno)
+  inner join client_master on  sales_order.Clientno = client_master.Clientno )
+  where client_master.name = "Ivan" or client_master.name = "Ravi";
+
+  select * from HOE091122_2_F;
+
+  +-----------+--------------+----------+------+------------+
+  | Productno | Description  | Clientno | name | QTYORDERED |
+  +-----------+--------------+----------+------+------------+
+  | P00001    | 1.44floppies | C00001   | Ivan |          1 |
+  | P07965    | 540 HDD      | C00001   | Ivan |          2 |
+  | P07885    | CD Drive     | C00001   | Ivan |          3 |
+  | P00001    | 1.44floppies | C00001   | Ivan |          4 |
+  | P07868    | Keyboards    | C00001   | Ivan |          5 |
+  | P07885    | CD Drive     | C00001   | Ivan |          6 |
+  | P00001    | 1.44floppies | C00001   | Ivan |          7 |
+  | P03453    | Monitors     | C00001   | Ivan |          8 |
+  | P03453    | Monitors     | C00001   | Ivan |          9 |
+  | P06734    | Mouse        | C00001   | Ivan |         10 |
+  | P07965    | 540 HDD      | C00001   | Ivan |         11 |
+  | P07975    | 1.44 Drive   | C00001   | Ivan |         12 |
+  | P00001    | 1.44floppies | C00001   | Ivan |         13 |
+  | P07975    | 1.44 Drive   | C00001   | Ivan |         14 |
+  +-----------+--------------+----------+------+------------+
+
+
+G. Find the product and their quantities for the orders placed by  clientno = "C00001" and clientno = "C00002".
+
+    create or replace view HOE091122_2_G as
+    select product_master.Productno ,product_master.Description,client_master.Clientno,client_master.name,SALES_ORDER_DETAILS.QTYORDERED 
+    from (((product_master
+    inner join  SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno)
+    inner join sales_order on  SALES_ORDER_DETAILS.orderno = sales_order.orderno)
+    inner join client_master on  sales_order.Clientno = client_master.Clientno )
+    where client_master.clientno = "C00001" or client_master.clientno = "C00002";
+  
+    select * from HOE091122_2_G;
+
+    +-----------+--------------+----------+------+------------+
+    | Productno | Description  | Clientno | name | QTYORDERED |
+    +-----------+--------------+----------+------+------------+
+    | P00001    | 1.44floppies | C00001   | Ivan |          1 |
+    | P07965    | 540 HDD      | C00001   | Ivan |          2 |
+    | P07885    | CD Drive     | C00001   | Ivan |          3 |
+    | P00001    | 1.44floppies | C00001   | Ivan |          4 |
+    | P07868    | Keyboards    | C00001   | Ivan |          5 |
+    | P07885    | CD Drive     | C00001   | Ivan |          6 |
+    | P00001    | 1.44floppies | C00001   | Ivan |          7 |
+    | P03453    | Monitors     | C00001   | Ivan |          8 |
+    | P03453    | Monitors     | C00001   | Ivan |          9 |
+    | P06734    | Mouse        | C00001   | Ivan |         10 |
+    | P07965    | 540 HDD      | C00001   | Ivan |         11 |
+    | P07975    | 1.44 Drive   | C00001   | Ivan |         12 |
+    | P00001    | 1.44floppies | C00001   | Ivan |         13 |
+    | P07975    | 1.44 Drive   | C00001   | Ivan |         14 |
+    +-----------+--------------+----------+------+------------+
+    
    
+3. Exercises On Sub_Queries :
+
+A. Find the productno, and description of non-moving products i.e product not bigning sold.
+
+    select p.Productno , p.description 
+    from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
+    where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
+    and sod.productno != p.productno;
   
