@@ -1,13 +1,13 @@
 create table product_master( Productno varchar(50), 
 Description varchar(50), 
 Profitpercent numeric(38,2),
- Unitmeasured varchar(50), 
- Qtyonhand numeric(38), 
- Recorderlvl numeric(38),
-  Sellprice numeric(38), 
-  Costprice numeric(38),
-  constraint pk_product_master
-  primary key (productno)
+Unitmeasured varchar(50), 
+Qtyonhand numeric(38), 
+Recorderlvl numeric(38),
+Sellprice numeric(38), 
+Costprice numeric(38),
+constraint pk_product_master
+primary key (productno)
 );
 
 
@@ -22,3 +22,17 @@ insert into product_master values ('P07975', '1.44 Drive',5, 'piece', 10, 3, 105
  insert into product_master values ('P08865', '1.22 Drive',5, 'piece',2,3, 1050, 1000); 
 
  select * from product_master;
+
+ +-----------+---------------+---------------+--------------+-----------+-------------+-----------+-----------+-----------+
+| Productno | Description   | Profitpercent | Unitmeasured | Qtyonhand | Recorderlvl | Sellprice | Costprice | New_Price |
++-----------+---------------+---------------+--------------+-----------+-------------+-----------+-----------+-----------+
+| P00001    | 1.44floppies  |          5.00 | piece        |       100 |          20 |       525 |       500 |       604 |
+| P03453    | Monitors      |          6.00 | piece        |        10 |           3 |     12000 |     11200 |     13800 |
+| P06734    | Mouse         |          5.00 | piece        |        20 |           5 |      1050 |       500 |      1208 |
+| P07865    | 1.22 floppies |          5.00 | piece        |       100 |          20 |       525 |       500 |       604 |
+| P07868    | Keyboards     |          2.00 | piece        |        10 |           3 |      3150 |      3050 |      3623 |
+| P07885    | CD Drive      |          2.50 | piece        |        10 |           3 |      5250 |      5100 |      6038 |
+| P07965    | 540 HDD       |          4.00 | piece        |        10 |           3 |      8400 |      8000 |      9660 |
+| P07975    | 1.44 Drive    |          5.00 | piece        |        10 |           3 |      1050 |      1000 |      1208 |
+| P08865    | 1.22 Drive    |          5.00 | piece        |         2 |           3 |      1050 |      1000 |      1208 |
++-----------+---------------+---------------+--------------+-----------+-------------+-----------+-----------+-----------+
