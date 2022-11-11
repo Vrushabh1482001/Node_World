@@ -326,8 +326,34 @@ G. Find the product and their quantities for the orders placed by  clientno = "C
 
 A. Find the productno, and description of non-moving products i.e product not bigning sold.
 
-    select p.Productno , p.description 
-    from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
-    where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
-    and sod.productno != p.productno;
-  
+
+    select product_master.productno , product_master.description
+    from product_master
+    left join SALES_ORDER_DETAILS
+    on product_master.productno = SALES_ORDER_DETAILS.productno
+    where product_master.productno not in (select product_master.productno from product_master inner join SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno);
+
+    +-----------+---------------+
+    | productno | description   |
+    +-----------+---------------+
+    | P07865    | 1.22 floppies |
+    | P08865    | 1.22 Drive    |
+    +-----------+---------------+
+
+
+B. List the customers name , Address1 ,Address2 , City , PinCode for the client who placed orderno = "O00001"  :
+
+   select client_master.clientno,client_master.Name,client_master.city,client_master.pincode,client_master.state
+   from client_master
+   inner join SALES_ORDER on  client_master.clientno = SALES_ORDER.Clientno
+   where SALES_ORDER.orderno="O00001";
+
+   +----------+------+--------+---------+-------------+
+   | clientno | Name | city   | pincode | state       |
+   +----------+------+--------+---------+-------------+
+   | C00001   | Ivan | Bombay |  400054 | Maharashtra |
+   +----------+------+--------+---------+-------------+
+
+C. List the client names that have placed orders before the month of may 2 :
+
+   select
