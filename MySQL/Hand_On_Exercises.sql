@@ -76,31 +76,20 @@ D. Find out the total of all the billed orders for month of 10.
     from SALES_ORDER
     where BILLYN="Y" and MONTH(ORDERDATE)=10;
 
+    create or replace view HOE091122_1_D as
     select so.ORDERDATE,sum(sod.QTYORDERED) as "Total"
     from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
     where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
-    and 10=(MONTH(so.ORDERDATE))
-    group by so.ORDERDATE;
-
-
-    create or replace view HOE091122_1_D as
-    select SALES_ORDER.ORDERDATE,sum(SALES_ORDER_DETAILS.QTYORDERED)
-    from (((product_master
-    inner join  SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno)
-    inner join sales_order on  SALES_ORDER_DETAILS.orderno = sales_order.orderno)
-    inner join client_master on  sales_order.Clientno = client_master.Clientno )
-    where  sales_order.BILLYN="Y"
-    group by SALES_ORDER.ORDERDATE
-    having 10=(MONTH(sales_order.DELYDATE));
+    group by so.ORDERDATE
+    having  10=(MONTH(so.ORDERDATE));
 
     select * from HOE091122_1_D;
    
-    +---------+----------+------------+--------+------------+-------------+
-    | ORDERNO | CLIENTNO | SALESMANNO | BILLYN | DELYDATE   | ORDERSTATUS |
-    +---------+----------+------------+--------+------------+-------------+
-    | O00004  | C00001   | S00001     | Y      | 2022-10-14 | Fulfilled   |
-    | O00003  | C00003   | S00003     | Y      | 2022-10-13 | Fulfilled   |
-    +---------+----------+------------+--------+------------+-------------+
+    +------------+-------+
+    | ORDERDATE  | Total |
+    +------------+-------+
+    | 2022-10-11 |   105 |
+    +------------+-------+
 
 
 2. Exercises on joins and Correlation.
@@ -210,7 +199,6 @@ D. Find the name of client who have purchased "Trousers";
    inner join product_master on product_master.productno = SALES_ORDER_DETAILS.productno)
    where product_master.description = "Monitors";
 
-   select * from HOE091122_2_D;
 
    create or replace view HOE091122_2_D as
    select client_master.name ,product_master.productno
@@ -220,11 +208,11 @@ D. Find the name of client who have purchased "Trousers";
    inner join client_master on  sales_order.Clientno = client_master.Clientno )
    where product_master.description = "Monitors";
   
-  
-    select c.Name,p.productno
-    from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
-    where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
-    and p.description = "Monitors"; 
+   create or replace view HOE091122_2_D as
+   select c.Name,p.productno
+   from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
+   where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
+   and p.description = "Monitors"; 
 
    select * from HOE091122_2_D;
 
@@ -326,12 +314,14 @@ G. Find the product and their quantities for the orders placed by  clientno = "C
 
 A. Find the productno, and description of non-moving products i.e product not bigning sold.
 
-
+    create or replace view HOE091122_3_A as
     select product_master.productno , product_master.description
     from product_master
     left join SALES_ORDER_DETAILS
     on product_master.productno = SALES_ORDER_DETAILS.productno
     where product_master.productno not in (select product_master.productno from product_master inner join SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno);
+
+    select * from HOE091122_3_A;
 
     +-----------+---------------+
     | productno | description   |
@@ -343,10 +333,13 @@ A. Find the productno, and description of non-moving products i.e product not bi
 
 B. List the customers name , Address1 ,Address2 , City , PinCode for the client who placed orderno = "O00001"  :
 
+   create or replace view HOE091122_3_B as
    select client_master.clientno,client_master.Name,client_master.city,client_master.pincode,client_master.state
    from client_master
    inner join SALES_ORDER on  client_master.clientno = SALES_ORDER.Clientno
    where SALES_ORDER.orderno="O00001";
+   
+   select * from HOE091122_3_B;
 
    +----------+------+--------+---------+-------------+
    | clientno | Name | city   | pincode | state       |
@@ -356,4 +349,57 @@ B. List the customers name , Address1 ,Address2 , City , PinCode for the client 
 
 C. List the client names that have placed orders before the month of may 2 :
 
-   select
+   create or replace view HOE091122_3_C as
+   select client_master.clientno, client_master.name
+   from client_master
+   inner join SALES_ORDER on  client_master.clientno = SALES_ORDER.Clientno
+   where (to_days(SALES_ORDER.ORDERDATE)) < (to_days("2022-10-14"));
+
+   select * from HOE091122_3_C;
+
+   +----------+---------+
+   | clientno | name    |
+   +----------+---------+
+   | C00001   | Ivan    |
+   | C00002   | Vandana |
+   | C00003   | Pramada |
+   +----------+---------+
+
+
+D. List if the product "1.44floppies" has been ordered by any client and print clientno,name to whom it was sold.
+
+    create or replace view HOE091122_3_D as
+    select c.clientno,c.Name
+    from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
+    where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
+    and p.description = "1.44floppies";
+
+    select * from HOE091122_3_D;
+
+    +----------+------+
+    | clientno | Name |
+    +----------+------+
+    | C00001   | Ivan |
+    | C00001   | Ivan |
+    | C00001   | Ivan |
+    | C00001   | Ivan |
+    +----------+------+ 
+
+
+E. List the names of client who have placed orders wroth Rs. 10000 or more.
+
+    create or replace view HOE091122_3_E as
+    select c.clientno,c.Name,sum(sod.PRODUCTRATE) as "Sum"
+    from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
+    where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
+    group by c.clientno
+    having (sum(sod.PRODUCTRATE))>=10000;
+
+    
+    select * from HOE091122_3_E;
+    
+    +----------+------+----------+
+    | clientno | Name | Sum      |
+    +----------+------+----------+
+    | C00001   | Ivan | 48750.00 |
+    +----------+------+----------+
