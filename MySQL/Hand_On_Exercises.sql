@@ -140,6 +140,13 @@ B. Find out the products and their quantities that will have to be delivered in 
    inner join sales_order on SALES_ORDER.orderno=SALES_ORDER_DETAILS.orderno)
    where 10=(MONTH(DELYDATE)) ; 
 
+select product_master.productno,product_master.Description ,SALES_ORDER_DETAILS.QTYORDERED,SALES_ORDER_DETAILS.QTYDISP,sales_order.DELYDATE 
+   from  ((product_master 
+   inner join SALES_ORDER_DETAILS on product_master.productno=SALES_ORDER_DETAILS.PRODUCTNO)
+   inner join sales_order on SALES_ORDER.orderno=SALES_ORDER_DETAILS.orderno)
+   where  sales_order.ORDERDATE < "2022-10-15"; 
+
+
    +-----------+--------------+------------+---------+------------+
    | productno | Description  | QTYORDERED | QTYDISP | DELYDATE   |
    +-----------+--------------+------------+---------+------------+
@@ -232,7 +239,7 @@ from (((product_master
 inner join  SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno)
 inner join sales_order on  SALES_ORDER_DETAILS.orderno = sales_order.orderno)
 inner join client_master on  sales_order.Clientno = client_master.Clientno )
-where SALES_ORDER_DETAILS.QTYORDERED<5;
+where SALES_ORDER_DETAILS.QTYORDERED<5 and product_master.description="Keyboards";  
 
    select * from HOE091122_2_E;
 
@@ -321,7 +328,12 @@ A. Find the productno, and description of non-moving products i.e product not bi
     on product_master.productno = SALES_ORDER_DETAILS.productno
     where product_master.productno not in (select product_master.productno from product_master inner join SALES_ORDER_DETAILS on product_master.productno = SALES_ORDER_DETAILS.productno);
 
-    select * from HOE091122_3_A;
+    create or replace view HOE091122_3_A as
+    select productno,description
+    from product_master
+    where productno not in (select PRODUCTNO from SALES_ORDER_DETAILS );
+     
+     select * from HOE091122_3_A;
 
     +-----------+---------------+
     | productno | description   |
@@ -339,6 +351,12 @@ B. List the customers name , Address1 ,Address2 , City , PinCode for the client 
    inner join SALES_ORDER on  client_master.clientno = SALES_ORDER.Clientno
    where SALES_ORDER.orderno="O00001";
    
+          create or replace view HOE091122_3_B as
+          select clientno,Name,city,pincode,state
+          from client_master
+          where clientno not in (select CLIENTNO from SALES_ORDER where orderno != "O00001");
+
+
    select * from HOE091122_3_B;
 
    +----------+------+--------+---------+-------------+
@@ -354,6 +372,10 @@ C. List the client names that have placed orders before the month of may 2 :
    from client_master
    inner join SALES_ORDER on  client_master.clientno = SALES_ORDER.Clientno
    where (to_days(SALES_ORDER.ORDERDATE)) < (to_days("2022-10-14"));
+
+    select clientno,Name
+    from client_master
+    where clientno in (select Clientno from SALES_ORDER where ORDERDATE < "2022-10-14");
 
    select * from HOE091122_3_C;
 
@@ -374,16 +396,18 @@ D. List if the product "1.44floppies" has been ordered by any client and print c
     where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
     and p.description = "1.44floppies";
 
+    create or replace view HOE091122_3_D as
+    select clientno,Name
+    from client_master
+    where clientno in (select clientno from SALES_ORDER where orderno in (select orderno from SALES_ORDER_DETAILS where productno in  (select Productno from product_master where description = "1.44floppies")));
+
     select * from HOE091122_3_D;
 
     +----------+------+
     | clientno | Name |
     +----------+------+
     | C00001   | Ivan |
-    | C00001   | Ivan |
-    | C00001   | Ivan |
-    | C00001   | Ivan |
-    +----------+------+ 
+    +----------+------+
 
 
 E. List the names of client who have placed orders wroth Rs. 10000 or more.
@@ -393,13 +417,17 @@ E. List the names of client who have placed orders wroth Rs. 10000 or more.
     from  client_master c , SALES_ORDER so, SALES_ORDER_DETAILS sod,product_master p
     where p.productno=sod.productno and so.orderno=sod.orderno and so.Clientno = c.Clientno
     group by c.clientno
-    having (sum(sod.PRODUCTRATE))>=10000;
+    having (sum(sod.PRODUCTRATE))>=10000; 
+
+    select clientno,name
+    from client_master
+    where clientno in (select clientno from SALES_ORDER where orderno in (select orderno from SALES_ORDER_DETAILS where productno in  (select Productno from product_master where Sellprice >= 10000)));
 
     
     select * from HOE091122_3_E;
     
-    +----------+------+----------+
-    | clientno | Name | Sum      |
-    +----------+------+----------+
-    | C00001   | Ivan | 48750.00 |
-    +----------+------+----------+
+    +----------+------+
+    | clientno | name |
+    +----------+------+
+    | C00001   | Ivan |
+    +----------+------+
