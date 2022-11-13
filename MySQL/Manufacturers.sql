@@ -156,6 +156,9 @@ select name,price from products where price>=180 order by price desc;
 
 --1.10  Select all the data from the products, including all the data for each product's manufacturer.
 select * from products inner join manufacturers on products.manufacturer=manufacturers.code;
+
+select * from products where manufacturer in (select code from manufacturers);
+
 +------+-----------------+-------+--------------+-------+------+-----------------+
 | Code | NAME            | Price | Manufacturer | Cents | Code | NAME            |
 +------+-----------------+-------+--------------+-------+------+-----------------+
@@ -174,6 +177,9 @@ select * from products inner join manufacturers on products.manufacturer=manufac
 
 --1.11  Select the product name, price, and manufacturer name of all the products.
 select products.code,products.name,manufacturers.name,products.price from products inner join manufacturers on products.manufacturer=manufacturers.code;
+
+select * from products where manufacturer in (select code from manufacturers);
+
 +------+-----------------+-----------------+-------+
 | code | name            | name            | price |
 +------+-----------------+-----------------+-------+
@@ -192,19 +198,27 @@ select products.code,products.name,manufacturers.name,products.price from produc
 
 --1.12 Select the average price of each manufacturer's products, showing only the manufacturer's code.
 select avg(price),b.code from products a,manufacturers b where b.code=a.manufacturer group by b.code;
-+--------------------+------+
-| avg(price)         | code |
-+--------------------+------+
-|              194.4 |    1 |
-|              108.9 |    2 |
-| 139.04999999999998 |    3 |
-|              121.5 |    4 |
-|              194.4 |    5 |
-|              56.25 |    6 |
-+--------------------+------+
+
+select avg(price),manufacturer from products where manufacturer in (select code from manufacturers) group by manufacturer;
+
+
++------------+--------------+
+| avg(price) | manufacturer |
++------------+--------------+
+|        216 |            1 |
+|        138 |            2 |
+|      154.5 |            3 |
+|        135 |            4 |
+|        216 |            5 |
+|       56.5 |            6 |
++------------+--------------+
 
 --1.13 Select the average price of each manufacturer's products, showing the manufacturer's name.
+
 select avg(price),b.name from products a,manufacturers b where b.code=a.manufacturer group by b.name;
+
+select avg(price),manufacturer from products where manufacturer in (select code from manufacturers) group by manufacturer;
+
 +--------------------+-----------------+
 | avg(price)         | name            |
 +--------------------+-----------------+
@@ -219,6 +233,8 @@ select avg(price),b.name from products a,manufacturers b where b.code=a.manufact
 --1.14 Select the names of manufacturer whose products have an average price larger than or equal to $150.
 select avg(a.price),b.name from products a,manufacturers b where b.code=a.manufacturer group by b.name having avg(price)>=150;
 select manufacturers.name from manufacturers inner join products on products.manufacturer=manufacturers.code where Price > (SELECT AVG(Price) FROM Products) or price=150;
+
+
 +------------+---------+
 | avg(price) | name    |
 +------------+---------+
@@ -227,8 +243,12 @@ select manufacturers.name from manufacturers inner join products on products.man
 +------------+---------+
 
 --1.15 Select the name and price of the cheapest product.
+
 select name , price from products where  price = (select min(price) from products);
+
 select b.name,a.name,a.price from product a,manufacturers b where a.manufacturer=b.code and price = (select min(price) from products);
+
+select code,name from manufacturers where code in (select manufacturer from  products where  price = (select min(price) from products));
 
 +------------+-------------+-------+
 | name       | name        | price |
@@ -237,8 +257,10 @@ select b.name,a.name,a.price from product a,manufacturers b where a.manufacturer
 +------------+-------------+-------+
 
 --1.16 Select the name of each manufacturer along with the name and price of its most expensive product.
-select name , price from products where  price = (select min(price) from products); 
+select name , price from products where  price = (select max(price) from products); 
 select b.name,a.name,a.price from products a,manufacturers b  where  a.Manufacturer=b.code group by b.name having max(price)=(select max(price) from products);
+
+select code,name from manufacturers where code in (select manufacturer from  products where  price = (select max(price) from products));
 
 +-----------------+---------------+-------+
 | name            | name          | price |
