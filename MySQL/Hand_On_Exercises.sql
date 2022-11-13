@@ -190,12 +190,12 @@ D. Find the name of client who have purchased "Monitors";
 
     select * from HOE091122_2_D;
 
-    +------+-----------+
-    | name | productno |
-    +------+-----------+
-    | Ivan | P03453    |
-    | Ivan | P03453    |
-    +------+-----------+
+    +---------+-----------+
+    | Name    | productno |
+    +---------+-----------+
+    | Ivan    | p03453    |
+    | Pramada | p03453    |
+    +---------+-----------+
 
 
 E. List the products and orders from customers who have ordered less than 5 unit of "Keybords".
@@ -317,7 +317,7 @@ C. List the client names that have placed orders before the month of may 2 :
     | C00003   | Pramada |
     | C00004   | Basu    |
     | C00005   | Ravi    |
-+----------+---------+
+    +----------+---------+
 
 
 D. List if the product "1.44floppies" has been ordered by any client and print clientno,name to whom it was sold.
@@ -325,7 +325,10 @@ D. List if the product "1.44floppies" has been ordered by any client and print c
     create or replace view HOE091122_3_D as
     select clientno,Name
     from client_master
-    where clientno in (select clientno from SALES_ORDER where orderno in (select orderno from SALES_ORDER_DETAILS where productno in  (select Productno from product_master where description = "1.44floppies")));
+    where clientno in (select clientno from SALES_ORDER where orderno in
+     (select orderno from SALES_ORDER_DETAILS where productno in  
+     (
+        select Productno from product_master where description = "1.44floppies")));
 
     select * from HOE091122_3_D;
 
