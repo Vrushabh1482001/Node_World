@@ -1,4 +1,4 @@
-// for (var i = 1; i <= 10; i++) {
+// for (let i = 1; i <= 10; i++) {
 //     console.log("Hello Vrushabh");
 //     if (i < 10) {
 //         console.log("In for loop");
@@ -9,10 +9,10 @@
 // }
 
 
-// var n = 5;
-// var string = "";
+// let n = 5;
+// let string = "";
 
-// for (var i = 0; i < n; i++) {
+// for (let i = 0; i < n; i++) {
 //     for (let j = 0; j < n; j++) {
 //         string += "*";
 //     }
@@ -29,10 +29,10 @@
 // *****
 // *****
 
-// var n = 5;
-// var string = "";
+// let n = 5;
+// let string = "";
 
-// for (var i = 0; i < n; i++) {
+// for (let i = 0; i < n; i++) {
 //     for (let j = 0; j < i; j++) {
 //         string += "*";
 //     }
@@ -49,11 +49,11 @@
 // ****
 
 
-// var n = 5;
-// var string = "";
+// let n = 5;
+// let string = "";
 
-// for (var i = 0; i < n; i++) {
-//     for (var j = 0; j < n; j++) {
+// for (let i = 0; i < n; i++) {
+//     for (let j = 0; j < n; j++) {
 //         if (i === 0 || i === n - 1) {
 //             string += "*";
 //         }
@@ -109,7 +109,7 @@
 // a / b = 2
 // a % b = 0
 
-// var student = {
+// let student = {
 //     name: "Vrushabh",
 //     std: 12,
 //     age: 22
