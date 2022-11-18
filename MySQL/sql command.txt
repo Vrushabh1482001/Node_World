@@ -1,0 +1,122 @@
+open mysql shell => cli => Command Line Interface
+1. \sql                         [\\switching to sql mode]
+2. \connect root@localhost:3309  [\\your ac]
+3. admin@123                     [\\password]
+4. y\n                           [your pc work(y) and other pc work(n)]
+5. show databases;               [pc in show all databases list]
+6. create database name;         [create new databases]
+7. show databases;               [pc in show all databases list]
+8. use databasename;             [use your select databases]
+9. show tables;                  [pc in show all tables list]
+10. create table tablename(colname datatype,.,.,.,.);      [create new table and columns]
+11. insert into tablename values(.,.,.),(.,.,.),(.,.,);    [insert data in table]
+12. select * from tablename;     [show table]
+13. describe tablename; 
+        or                       [structur table]
+    desc tablename;        
+14. \quit                        [exit sql]
+
+/*/retrive/select database-name of table ::-
+    -> select * from <table-name>;
+	
+  => show select column of table::-
+     select column1, column2, columnN from <tablename>;
+	 
+  => one time show full table and add show table column extra
+     select *,colname from tablename;
+  
+  => Alias Name ::-
+     select colname'alias name' from <table name>;  
+     select colname as 'alias name' from <table name>;  
+	 
+/*/ Where cluese ::-
+   
+     select colname from tablename where colname = 'data';
+	 select colname from tablename where colname condition data; [condition = , <,>,!=,<>]
+
+/*/ Special Operators ::-
+    
+	=>Between - checks an attribute value within range
+	 select * from <table_name> where colname between __ and __ ;
+	 
+	=>Like - checks an attribute value matches a given string pattern
+	 select * from <table_name> where colname like '___';
+	 
+	=>Is Null - checks an attribute value is null
+	 select * from <table_name> where colname is null; 
+	 
+	=>In - checks an attribute value matches any value within a value list
+	 select * from <table_name> where colname in(__,__,__) ; 
+	
+    =>Distinct - Limits values to unique values
+	 select * distinct(colname) <table_name>;	
+	 
+	 
+/*/ Aggregations Functions
+    
+     =>Avg() - Return the avrege value from specified columns	
+	   select avg(colname) from table_name;
+	   
+	 =>Count() - Return the number of table rows
+	   select count(*) from table_name;
+	   
+	 =>Max() - Return largest value among the records 
+	   select max(colname) from table_name;
+	   
+	 =>Min() - Return smallest value among the records
+	   select min(colname) from table_name;
+	   
+	 =>Sum() - Return the sum of specified colum values
+	   select sum(colname) from table_name;
+	 
+/*/ Group by clause
+    => Arrange identical data into grouos.
+	   select max(colname),colname 
+	   from table_name
+       group by colname;	   
+	   
+/*/ DDL(Data Definition Language)
+    ***Create column***
+	create table tablename(colname datatype,.,.,.,.);
+	
+	***Add column***
+	alter table tablename add column columname datatype;
+
+	***Rename colum***
+	alter table tablename rename column columname to newcolumname;
+
+	***Remove all Record delete permanently***
+	truncate  table tablename;
+
+	***Table delete***
+	drop table tablename;  
+	
+/*/ DML(Data Manipulation Language)
+	***Insert values***
+	insert into tablename values(.,.,.),(.,.,.),(.,.,);
+
+	***Update***
+	update tablename set columnname='changes ' where uniquecolumnname='value';
+
+	***Record delete***
+       delete from tablename where uniquecolumnname in (delete); 
+
+	***Table delete***
+	drop table tablename; 
+
+/*/ DCL(Data Control Language)
+    ***Grant - Gives access privileges to databases***
+	   grant <column list> on <Table Name> to <user>
+	   
+	***Revok - Withdraws access privilege given with the grant command***
+	   revoke <column list> on <Table Name> to <user>
+
+/*/ TCL(Transaction Control Language)
+    ***Commit - Save yhe work done***
+	   
+	   
+	***Rollback - Restores data  to origin state since the last commit - undo***
+	   
+	 
+	***Savepoint - Identify a point a transaction to which you can roll back later***
+        	
