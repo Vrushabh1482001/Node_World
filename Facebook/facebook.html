@@ -109,7 +109,25 @@
         }
     </style>
     <script>
-        function 
+        function DataEnter() {
+            let Password = document.getElementById("password").value;
+            if (Password = 82001) {
+                let Fname = document.getElementById("fname").value;
+                let Lname = document.getElementById("lname").value;
+                let Email = document.getElementById("email").value;
+                let ReEmail = document.getElementById("re-email").value;
+                let Gender = document.getElementById("Gender").value;
+                document.writeln("Your info : " + "<br>" + "Your Name : " + Name + "  " + Lname);
+                document.writeln("Your Email : " + Email);
+                document.writeln("Your Gender : " + Gender);
+            }
+            else {
+                document.writeln("Sorry Enter your Wrong Password.....!")
+            }
+
+
+        }
+
     </script>
 
 
@@ -158,7 +176,7 @@
     <div class="box">
 
         <div>
-            <form>
+            <form onsubmit="DataEnter">
                 <table>
                     <tr>
                         <td><input type="text" name="name" id="fname" placeholder="First Name"></td>
@@ -329,7 +347,8 @@
                             our Data Use Policy including our Cookie Use</td>
                     </tr>
                     <tr>
-                        <td class="button2">Sign up</td>
+                        <!--<td class="button2" id>Sign up</td>-->
+                        <td><input type="submit" value="Sign Up"></td>
                     </tr>
                     <tr class="celebrity">
                         <td colspan="2"> Create a Page for a celebrity, band or business.</td>
