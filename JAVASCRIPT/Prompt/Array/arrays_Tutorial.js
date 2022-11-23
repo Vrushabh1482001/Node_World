@@ -133,24 +133,23 @@ where start and end represent the index of items in that array.The original arra
 // let new_arr = arr_new.slice();
 // console.log(new_arr);
 
+
+/*** at() ***/
+
+//  => Show Enter a index number on stor elemant :-
+
 // let arr_new = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
-// console.log(arr_new.at(4));
+// console.log(arr_new.at(4));  // 14
+
+/*** Join() ***/
+
+//  => Join all element of an array into String.
 
 // console.log(arr_new.join());
 // console.log(arr_new.join(""));
 // console.log(arr_new.join("-"));
 // console.log(typeof arr_new.join());
 
-
-// Function()
-
-//function test(n) {
-//     console.log('Inside Function .... ${n}');  //Template literal
-//     return n * n;
-// }
-
-// let n = test(10);
-// console.log(typeof n);
 
 
 
