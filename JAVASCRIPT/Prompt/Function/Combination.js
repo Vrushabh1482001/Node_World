@@ -1,12 +1,39 @@
-/* Write a JS function that generates all combinations of a string. 
+/* Write a JS function that generates all combinations of a string.
 Example string : 'dog'
 Expected Output : d,do,dog,o,og,g */
 
 /*** Named Function ***/
+const prompt = require("prompt-sync")();
+/* function PossibleCom(Str){
+    let CombinationArr = [];
+    for (let i = 0; i < Str.length; i++) {
+        for (let j = i + 1; j < Str.length + 1; j++) {
+            CombinationArr.push(Str.slice(i, j));
+        }
+    }
+    return CombinationArr.join("-");
+}
+let String = prompt("Enter String:");
+console.log(PossibleCom(String)); */
 
-//const prompt = require("prompt-sync")();
+/*** Anonymous Function ***/
 
-function combination(str) {
+/* let PossibleCom = (Str) => {
+    let CombinationArr = [];
+    for (let i = 0; i < Str.length; i++) {
+        for (let j = i + 1; j < Str.length + 1; j++) {
+            CombinationArr.push(Str.slice(i, j));
+        }
+    }
+    return CombinationArr.join("-");
+}
+let String = prompt("Enter String:");
+console.log(PossibleCom(String)); */
+
+
+/***  Two char combination ***/
+
+/* function combination(str) {
     let len = str.length;
     let CombinationArr = [];
     let i = 0;
@@ -23,27 +50,29 @@ function combination(str) {
     }
     // console.log(CombinationArr);
     return CombinationArr;
-}
+} */
 
 // let String = (prompt("Enter a value : "));
 
-console.log(combination("Dog"));
+// console.log(combination("Vrushabh"));
 
 
 
+/*** One char Add ***/
+/* function combination(str) {
 
-// function StringDivide(str) {
+    let len = str.length;
+    let arr = [];
+    for (let i = 0; i < len; i++) {
+        if (i == 0) {
+            arr.push(str[i]);
+        }
+        else {
+            arr.push(arr[i - 1] + str[i]);
+        }
+    }
+    console.log(arr);
+    // return arr;
+}
 
-//     let len = str.length;
-//     let arr = [];
-//     for (let i = 0; i < len; i++) {
-//         if (i == 0) {
-//             arr.push(str[i]);
-//         }
-//         else {
-//             arr.push(arr[i - 1] + str[i]);
-//         }
-//     }
-//     console.log(arr);
-//     // return arr;
-// }
+console.log(combination("Vrushabh")); */

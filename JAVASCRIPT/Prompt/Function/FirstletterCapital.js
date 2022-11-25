@@ -53,33 +53,3 @@ FirstLetterCapital("the quick brown fox."); */
 
 FirstLetterCapital("the quick brown fox."); */
 
-
-
-
-/* function FirstLetterCapital(string) {
-
-    let Arr = [];
-    let temp = "";
-
-    for (let i = 0; i < string.length; i++) {
-
-
-        if (string[i] != " ") {
-            temp += string[i];
-        }
-        else {
-            Arr.push(temp);
-            temp = "";
-        }
-    }
-    console.log(Arr);
-    console.log(Arr.length);
-
-    for (i = 0; i < Arr.length; i++) {
-        let temp = Arr[i];
-        console.log(temp.toUpperCase(temp[0]));
-
-    }
-
-} */
-
