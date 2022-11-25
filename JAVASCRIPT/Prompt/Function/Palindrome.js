@@ -3,7 +3,7 @@
 
 /*** Named Function ***/
 
-// const prompt = require("prompt-sync")();
+const prompt = require("prompt-sync")();
 /*function Palindrome(str) {
     let i;
     let len = str.length;
