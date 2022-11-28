@@ -4,12 +4,34 @@ Expected Output : d,do,dog,o,og,g */
 
 /*** Named Function ***/
 const prompt = require("prompt-sync")();
+// ( 1 )
 /* function PossibleCom(Str){
     let CombinationArr = [];
     for (let i = 0; i < Str.length; i++) {
         for (let j = i + 1; j < Str.length + 1; j++) {
             CombinationArr.push(Str.slice(i, j));
         }
+    }
+    return CombinationArr.join("-");
+}
+let String = prompt("Enter String:");
+console.log(PossibleCom(String)); */
+
+// ( 2 )
+
+/* function PossibleCom(Str) {
+    let CombinationArr = [];
+    let temp = "";
+    for (let i = 0; i < Str.length; i++) {
+        for (let j = i; j < Str.length + 1; j++) {
+            if (i == j) {
+                CombinationArr.push(Str[i]);
+            }
+            else {
+                temp = temp + Str[j];
+            }
+        }
+        CombinationArr.push(temp);
     }
     return CombinationArr.join("-");
 }
@@ -59,7 +81,8 @@ console.log(PossibleCom(String)); */
 
 
 /*** One char Add ***/
-/* function combination(str) {
+/* 
+function combination(str) {
 
     let len = str.length;
     let arr = [];
@@ -75,4 +98,4 @@ console.log(PossibleCom(String)); */
     // return arr;
 }
 
-console.log(combination("Vrushabh")); */
+console.log(combination("Vrushabh"));  */
