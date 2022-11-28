@@ -1,0 +1,498 @@
+/*
+    <--> String.prototype[@@iterator]()
+            The @@iterator method of a string implements the iterable protocol and allows strings to be consumed by most syntaxes 
+            expecting iterables, such as the spread syntax and for...of loops. It returns an iterator that yields the Unicode code 
+            points of the string value as individual strings.
+
+        Syntax  :=
+                string[Symbol.iterator]()
+
+        Example :=
+                let str = "The";
+                let iterator = str[Symbol.iterator]();
+                let theChar = iterator.next();
+                while (!theChar.done && theChar.value !== ' ') {
+                console.log(theChar.value);                                 //      T
+                theChar = iterator.next();                                  //      h
+                }                                                           //      e
+
+
+    <--> String.prototype.at()
+            The at() method takes an integer value and returns a new String consisting of the single UTF-16 code unit located at 
+            the specified offset. This method allows for positive and negative integers. Negative integers count back from the 
+            last string character.
+
+        Syntax  :=
+                at(index)
+
+        Example :=
+                let sentence = 'The quick brown fox jumps over the lazy dog';
+                let index = 5;
+                console.log(`Using an index of ${index} the character returned is ${sentence.at(index)}`);          
+                                                                                    //      Using an index of 5 the character returned is u
+              
+                                                                                    
+    <--> String.prototype.charAt()
+            The String object's charAt() method returns a new string consisting of the single UTF-16 code unit located at 
+            the specified offset into the string.
+
+
+        Syntax  :=
+                charAt(index)
+
+        Example :=
+                let sentence = 'The quick brown fox jumps over the lazy dog.';
+                let index = 4;
+                console.log(`The character at index ${index} is ${sentence.charAt(index)}`);             //   The character at index 4 is q
+
+
+    <-->String.prototype.charCodeAt()
+            The charCodeAt() method returns an integer between 0 and 65535 representing the UTF-16 code unit at the given index.
+
+
+        Syntax  :=
+                charCodeAt(index)
+
+        Example :=
+                let sentence = 'The quick brown fox jumps over the lazy dog.';
+                let index = 4;
+                console.log(`The character code ${sentence.charCodeAt(index)} is equal to ${sentence.charAt(index)}`);
+                                                                                            //      The character code 113 is equal to q
+
+
+    <--> String.prototype.codePointAt()
+            The codePointAt() method returns a non-negative integer that is the Unicode code point value at the given position. 
+            Note that this function does not give the nth code point in a string, but the code point starting at the specified string index.
+
+        Syntax  :=
+                codePointAt(pos)
+
+        Example :=
+                const icons = '☃★♲';
+                console.log(icons.codePointAt(2));  
+
+
+    <--> String.prototype.concat()
+            The concat() method concatenates the string arguments to the calling string and returns a new string.
+
+        Syntax  :=
+                concat(str1)
+                concat(str1, str2)
+                concat(str1, str2, / …, / strN)
+
+        Example :=
+                const str1 = 'Hello';
+                const str2 = 'World';
+                console.log(str1.concat(' ', str2));                //      Hello World
+                console.log(str2.concat(', ', str1));               //      World, Hello
+
+
+    <--> String.prototype.endsWith()
+            The endsWith() method determines whether a string ends with the characters of a specified string, 
+            returning true or false as appropriate.
+
+        Syntax  :=
+                endsWith(searchString)
+                endsWith(searchString, endPosition)
+
+        Example :=
+                const str1 = 'Cats are the best!';
+                console.log(str1.endsWith('best!'));                 //     true
+                console.log(str1.endsWith('best', 17));              //     true
+                
+                const str2 = 'Is this a question?';
+                console.log(str2.endsWith('question'));              //     false
+
+
+    <--> String.fromCharCode()
+            The static String.fromCharCode() method returns a string created from the specified sequence of UTF-16 
+            code units.
+
+        Syntax  :=
+                String.fromCharCode(num1)
+                String.fromCharCode(num1, num2)
+                String.fromCharCode(num1, num2, / …, / numN)
+
+        Example :=
+
+
+    <--> String.fromCodePoint()
+            The static String.fromCodePoint() method returns a string created by using the specified sequence of code points.
+            
+        Syntax  :=
+                String.fromCodePoint(num1)
+                String.fromCodePoint(num1, num2)
+                String.fromCodePoint(num1, num2, / …, / numN)
+        
+        Example :=
+
+
+    <--> String.prototype.includes()
+            The includes() method performs a case-sensitive search to determine whether one string may be found within another string, 
+            returning true or false as appropriate.
+
+        Syntax  :=
+                includes(searchString)
+                includes(searchString, position)
+
+        Example :=
+                let sentence = 'The quick brown fox jumps over the lazy dog.';
+                let word = 'kinjal';
+                console.log(`The word "${word}" ${sentence.includes(word)
+                ? 'is' : 'is not'} in the sentence`);                       //  The word "kinjal" is not in the sentence
+
+
+    <--> String.prototype.indexOf()
+            The indexOf() method, given one argument: a substring to search for, searches the entire calling string, and returns 
+            the index of the first occurrence of the specified substring. Given a second argument: a number, the method returns the 
+            first occurrence of the specified substring at an index greater than or equal to the specified number.
+
+        Syntax  :=
+                indexOf(searchString)
+                indexOf(searchString, position)
+
+        Example :=
+                let paragraph = 'The quick brown fox jumps over the lazy dog. If the dog barked, was it really lazy?';
+                let searchTerm = 'dog';
+                let indexOfFirst = paragraph.indexOf(searchTerm);
+                console.log(`The index of the first "${searchTerm}" from the beginning is ${indexOfFirst}`);        
+                                                                                //      The index of the first "dog" from the beginning is 40
+                console.log(`The index of the 2nd "${searchTerm}" is ${paragraph.indexOf(searchTerm, (indexOfFirst + 1))}`);
+                                                                                //      The index of the 2nd "dog" is 52
+
+
+    <--> String.prototype.lastIndexOf()
+            The lastIndexOf() method, given one argument: a substring to search for, searches the entire calling string, and returns the 
+            index of the last occurrence of the specified substring. Given a second argument: a number, the method returns the last 
+            occurrence of the specified substring at an index less than or equal to the specified number.
+
+        Syntax  :=
+                lastIndexOf(searchString)
+                lastIndexOf(searchString, position)
+
+        Example :=
+                let paragraph = 'The quick brown fox jumps over the lazy dog. If the dog barked, was it really lazy?';
+                let searchTerm = 'dog';
+                console.log(`The index of the first "${searchTerm}" from the end is ${paragraph.lastIndexOf(searchTerm)}`);
+                                                                                    //     The index of the first "dog" from the end is 52
+
+
+    <--> String.prototype.localeCompare()
+            The localeCompare() method returns a number indicating whether a reference string comes before, or after, or is the same as the 
+            given string in sort order. In implementations with Intl.Collator API support, this method simply calls Intl.Collator.                    
+        
+        Syntax  :=
+                localeCompare(compareString)
+                localeCompare(compareString, locales)
+                localeCompare(compareString, locales, options)
+
+        Example :=
+                let a = 'reverse'; // with accents, lowercase
+                let b = 'RESERVE'; // no accents, uppercase
+                console.log(a.localeCompare(b));                        //      1
+
+
+    <--> String.prototype.match()
+            The match() method retrieves the result of matching a string against a regular expression.
+
+        Syntax  :=
+                match(regexp)
+
+        Example :=
+                let paragraph = 'ABCDEFGabcdefg';
+                let regex = /[A-C]/gi;
+                let found = paragraph.match(regex);
+                console.log(found);                                     //          [ 'A', 'B', 'C', 'a', 'b', 'c' ]
+
+
+    <--> String.prototype.matchAll()
+            The matchAll() method returns an iterator of all results matching a string against a regular expression, 
+            including capturing groups.
+
+        Syntax  :=
+                matchAll(regexp)
+
+        Example :=
+
+
+    <--> String.prototype.normalize()
+            The normalize() method returns the Unicode Normalization Form of the string.
+
+        Syntax  :=
+                normalize()
+                normalize(form)
+
+        Example :=
+                let name1 = '\u0041\u006d\u00e9\u006c\u0069\u0065';
+                let name2 = '\u0041\u006d\u0065\u0301\u006c\u0069\u0065';
+                console.log(`${name1}, ${name2}`);                                      //          Amélie, Amélie  
+                console.log(name1 === name2);                                           //        false
+                console.log(name1.length === name2.length);                             //        false
+                
+                let name1NFC = name1.normalize('NFC');              
+                let name2NFC = name2.normalize('NFC');
+                console.log(`${name1NFC}, ${name2NFC}`);                                //          Amélie, Amélie  
+                console.log(name1NFC === name2NFC);                                     //         true
+                console.log(name1NFC.length === name2NFC.length);                       //         true
+
+
+
+    <--> String.prototype.padEnd()
+            The padEnd() method pads the current string with a given string (repeated, if needed) so that the resulting string
+            reaches a given length. The padding is applied from the end of the current string.
+
+        Syntax  :=
+                padEnd(targetLength)
+                padEnd(targetLength, padString)
+
+        Example :=
+                let str1 = 'Breaded Mushrooms';
+                let str2 = 'Kinjal Thummar'
+                console.log(str1.padEnd(25, '.'));                          //         Breaded Mushrooms........
+                console.log(str2.padEnd(18,'/'));                           //          Kinjal Thummar////
+
+
+    <--> String.prototype.padStart()
+            The padStart() method pads the current string with another string (multiple times, if needed) until the resulting 
+            string reaches the given length. The padding is applied from the start of the current string.
+
+        Syntax  :=
+                padStart(targetLength)
+                padStart(targetLength, padString)
+
+        Example :=
+                let fullNumber = '123456789';
+                let last4Digits = fullNumber.slice(-4);
+                let maskedNumber = last4Digits.padStart(fullNumber.length, '*');
+                console.log(maskedNumber);                                                  //          *****6789
+
+
+    <--> String.raw()
+            The static String.raw() method is a tag function of template literals. This is similar to the r prefix in Python, 
+            or the @ prefix in C# for string literals. It's used to get the raw string form of template literals — that is, 
+            substitutions (e.g. ${foo}) are processed, but escape sequences (e.g. \n) are not.
+
+        Syntax  :=
+                String.raw(strings, ...substitutions)
+
+        Example :=
+
+
+    <--> String.prototype.repeat()
+            The repeat() method constructs and returns a new string which contains the specified number of copies of the string 
+            on which it was called, concatenated together.
+
+        Syntax  :=
+                repeat(count)
+
+        Example :=
+                let chorus = 'Node ';
+                console.log(chorus.repeat(5));                                      //      Node Node Node Node Node 
+
+
+                
+
+    <--> String.prototype.replace()
+            The replace() method returns a new string with one, some, or all matches of a pattern replaced by a replacement. The 
+            pattern can be a string or a RegExp, and the replacement can be a string or a function called for each match. If 
+            pattern is a string, only the first occurrence will be replaced. The original string is left unchanged.
+
+        Syntax  :=
+                replace(pattern, replacement)
+
+        Example :=       
+                let p = 'The quick brown fox jumps over the lazy dog. ';
+                console.log(p.replace('dog', 'monkey'));                    //      The quick brown fox jumps over the lazy monkey. 
+                
+                let regex = /Dog/i;
+                console.log(p.replace(regex, 'ferret'));                    //      The quick brown fox jumps over the lazy ferret. 
+
+
+    <--> String.prototype.replaceAll()
+            The replaceAll() method returns a new string with all matches of a pattern replaced by a replacement. The pattern can be 
+            a string or a RegExp, and the replacement can be a string or a function to be called for each match. The original string 
+            is left unchanged.
+
+        Syntax  :=
+                replaceAll(pattern, replacement)
+
+        Example :=
+                let p = 'The quick brown fox jumps over the lazy dog. If the dog reacted, was it really lazy?';
+                console.log(p.replaceAll('dog', 'Monkey'));                            
+                                            //       The quick brown fox jumps over the lazy Vrushabh. If the Vrushabh reacted, was it really lazy?
+
+
+
+    <--> String.prototype.search()
+            The search() method executes a search for a match between a regular expression and this String object.
+        
+        Syntax :=
+                search(regexp)
+
+        Example :=
+                let  paragraph = 'The quick brown fox jumps over the lazy dog.';
+                let regex = /[^\w\s]/g;
+                console.log(paragraph.search(regex));                   //   43
+                console.log(paragraph[paragraph.search(regex)]);        //   .
+
+
+
+
+    <--> String.prototype.slice()
+            The slice() method extracts a section of a string and returns it as a new string, without modifying the original string.
+
+        Syntax :=
+                slice(indexStart)
+                slice(indexStart, indexEnd
+
+        Example :=
+                const str = 'The quick brown fox jumps over the lazy dog.';
+                console.log(str.slice(25));                             //  over the lazy dog
+                console.log(str.slice(4, 19));                          //  quick brown fox
+                console.log(str.slice(-4));                             //  dog.
+                console.log(str.slice(-9, -5));                         //  lazy
+
+  
+
+
+    <--> String.prototype.split()
+            The split() method takes a pattern and divides a String into an ordered list of substrings by searching for 
+            the pattern, puts these substrings into an array, and returns the array.
+
+    Syntax :=
+            split()
+            split(separator)
+            split(separator, limit)
+
+    Example :=
+            let str = 'The quick brown fox jumps over the lazy dog.';
+            let  words = str.split(' ');
+            console.log(words[3]);                  // fox
+            
+            let  chars = str.split('');
+            console.log(chars[8]);                  //  k
+            
+            let  strCopy = str.split();
+            console.log(strCopy);                   // [ 'The quick brown fox jumps over the lazy dog.' ]
+
+
+
+    <--> String.prototype.startsWith()
+            The startsWith() method determines whether a string begins with the characters of a specified string, returning true or false as appropriate.
+
+       
+        Syntax :=
+                startsWith(searchString)
+                startsWith(searchString, position)
+
+        Example :=
+            let str1 = 'Saturday night plans';
+            console.log(str1.startsWith('Sat'));
+            console.log(str1.startsWith('Sat', 3));
+        
+            
+
+    <--> String.prototype.substring()
+            The substring() method returns the part of the string between the start and end indexes, or to the end of the string.
+
+        Syntax :=
+                substring(indexStart)
+                substring(indexStart, indexEnd)
+
+        Example :=
+                let str = 'Mozilla';
+                
+                console.log(str.substring(2, 4));                   // zi
+                console.log(str.substring(2));                      // zilla
+                
+
+    <--> String.prototype.toLocaleLowerCase()
+             The toLocaleLowerCase() method returns the calling string value converted to lower case, according to any locale-specific case mappings.
+
+        Syntax :=
+                toLocaleLowerCase()
+                toLocaleLowerCase(locales)
+
+
+        Example :=
+                let dotted = 'kinjal';
+                
+                console.log(`EN-US: ${dotted.toLocaleLowerCase('en-US')}`);             // EN-US: kinjal
+                console.log(`TR: ${dotted.toLocaleLowerCase('tr')}`);                   // TR: kinjal
+
+
+    <==> String.prototype.toLocaleUpperCase()
+             The toLocaleUpperCase() method returns the calling string value converted to upper case, according to any locale-specific case mappings.
+
+        
+        Syntax :=
+                toLocaleUpperCase()
+                toLocaleUpperCase(locales)
+            
+                
+        Example :=
+                let city = 'istanbul';
+                
+                console.log(city.toLocaleUpperCase('en-US'));            // ISTANBUL
+                console.log(city.toLocaleUpperCase('TR'));              //  İSTANBUL
+
+
+    <--> String.prototype.trim()
+            The trim() method removes whitespace from both ends of a string and returns a new string, without modifying the original string.
+
+
+        Syntax :=
+                    trim()
+
+
+        Example :=
+                let greeting = '   Hello world!   ';
+                
+                console.log(greeting);                  //      Hello world!
+                console.log(greeting.trim());           // Hello world!
+                
+
+    <--> String.prototype.trimEnd()
+            The trimEnd() method removes whitespace from the end of a string and returns a new string, without modifying the original string. trimRight() is an alias of this method.
+
+
+    Syntax :=
+            trimEnd()
+            trimRight()
+
+    Example :=
+            let greeting = '   Hello world!   ';
+            
+            console.log(greeting);                          //     Hello world!
+            console.log(greeting.trimEnd());                //     Hello world!
+
+
+    <--> String.prototype.trimStart()
+            The trimStart() method removes whitespace from the beginning of a string and returns a new string, without modifying the original string. trimLeft() is an alias of this method.
+
+        Syntax :=
+                trimStart()
+                trimLeft()
+
+        Example :=
+                let greeting = '   Hello world!   ';
+                
+                console.log(greeting);                          //     Hello world!
+                console.log(greeting.trimStart());              // Hello world!
+
+
+
+    <--> String.prototype.valueOf()
+             The valueOf() method returns the primitive value of a String object.
+
+
+        Syntax :=
+                valueOf()
+
+        Example :=
+                let stringObj = new String('foo');
+                
+                console.log(stringObj);                     // [String: 'foo']
+                console.log(stringObj.valueOf());           // foo
+
+*/        
