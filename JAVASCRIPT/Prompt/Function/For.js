@@ -1,4 +1,4 @@
-/ The for loop:
+// The for loop:
 
 // for (let index=0; index < someArray.length; index++) {
 //   const elem = someArray[index];
@@ -27,35 +27,35 @@
 
 // Example
 
-const arr = ["a", "b", "c", "d", "e"];
+// const arr = ["a", "b", "c", "d", "e"];
 
 // for (let i = 0; i < arr.length; i++) {
 //   console.log(arr[i]);
 // }
 
-// for (let i in arr) {
-//   console.log(arr[i]);
-// }
+/* for (let i in arr) {
+    console.log(arr[i]);
+} */
 
 // With the other two constructs, forEach() and for/of, you get access to the array element itself. With forEach() you can access the array index i, with for/of you cannot.
 
-// arr.forEach(() => {});
+// arr.forEach(() => { });
 
-// arr.forEach((v, i, a) => console.log(${i} - ${v} - ${a}));
+// arr.forEach((v, i, a) => console.log(`${i} - ${v} - ${a}`));
 
-// for (let v of arr) {
-//   console.log(v);
-// }
+/* for (let i of arr) {
+    console.log(i);
+}
+ */
+// arr.test = "bad";
 
-arr.test = "bad";
-
-console.log(arr);
+// console.log(arr);
 // [ 'a', 'b', 'c', 'd', 'e', test: 'bad' ]
 
 // Prints "a, b, c, bad"
 
 // for (let i in arr) {
-//   console.log(i + " - " + arr[i]);
+//     console.log(i + " - " + arr[i]);
 // }
 
-arr.forEach((v, i, a) => console.log(${ i } - ${ v } - ${ a }));
+// arr.forEach((v, i, a) => console.log(`${i} - ${v} - ${a}`));

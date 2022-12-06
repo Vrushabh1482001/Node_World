@@ -132,7 +132,7 @@ total(number, sum); */
 
 /*************************** Promise With Arr *********************************/
 
-/* let sum = (number1) => {
+let sum = (number1) => {
     while (number1 > 9) {
         console.log(number1);
         let sum1 = 0;
@@ -177,5 +177,43 @@ total(number[0], sum)
     })
     .catch(() => {
         console.log("Retry");
-    });
- */
+    })
+    .finally(() => {
+        console.log("Array End.....!");
+    })
+
+
+/*************************** callback function *********************************/
+
+/* let add = (num, callback) => {
+    return callback(num + 10, true);
+}
+let sub = (num, callback) => {
+    return callback(num - 5, true);
+}
+let mul = (num, callback) => {
+    return callback(num * 2, true);
+}
+let div = (num, callback) => {
+    return callback(num / 3, true);
+}
+
+add(10, (addresult, result) => {
+    if (result) {
+        sub(addresult, (subresult, result) => {
+            if (result) {
+                mul(subresult, (mulresult, result) => {
+                    if (result) {
+                        div(mulresult, (divresult, result) => {
+                            if (result) {
+                                console.log(divresult);
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+}) */
+
+
