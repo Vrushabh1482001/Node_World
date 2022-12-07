@@ -131,7 +131,7 @@ total(number, sum); */
 
 
 /*************************** Promise With Arr *********************************/
-
+/* 
 let sum = (number1) => {
     while (number1 > 9) {
         console.log(number1);
@@ -181,7 +181,7 @@ total(number[0], sum)
     .finally(() => {
         console.log("Array End.....!");
     })
-
+ */
 
 /*************************** callback function *********************************/
 
