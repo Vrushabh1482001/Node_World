@@ -15,7 +15,7 @@ const prompt = require("prompt-sync")();
     return CombinationArr.join("-");
 }
 let String = prompt("Enter String:");
-console.log(PossibleCom(String)); */
+console.log(PossibleCom(dog)); */
 
 // ( 2 )
 
