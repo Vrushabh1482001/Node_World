@@ -288,6 +288,34 @@ console.log(uniqueChar("thequickbrownfoxjumpsoverthelazydog")); */
 
 // 17. Write a JS function to  get the number of occurrences of each letter in specified string. 
 
+// let Occurrences = (String) => {
+    // String = String.toLowerCase().split("").sort().join("");
+/*     let result = [];
+    for (let i of String) {
+        let Arr = [];
+        Arr = [...String.matchAll(i)];
+        result.push(`${i} : ${Arr.length}`);
+    } */
+
+/*     let result1 = [];
+    for (let i of String) {
+        let Arr = [];
+        Arr = [...String.matchAll(i)];
+        // String = String.replaceAll(i, '');
+        result1.push(`${i} : ${Arr.length}`);
+    }
+    let result = [];
+    for (let i of result1) {
+        if (!(result.includes(i))) {
+            result.push(i);
+        }
+    }
+
+    return result;
+}
+console.log(Occurrences('thequickbrownfoxjumpsoverthelazydog')); */
+
+
 /*******************************************************************************************************************************************************************************************************************/
 
 // 18. Write a function for searching JS arrays with a binary search. 
