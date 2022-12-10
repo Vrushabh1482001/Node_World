@@ -138,25 +138,6 @@ console.log(TypeArg("Vrushabh")) */
 
 // 10. Write a JS function which returns the n rows by n columns identity matrix.
 
-/* let Matrix = (Arr, n) => {
-    let result = [];
-    result.length = n;
-    while (Arr.length != 0) {
-        for (let j = 0; j < n; j++) {
-            console.log(Arr);
-            let rowArr = [];
-            rowArr.push(Arr[0]);
-            Arr.shift();
-        }
-        result.push(rowArr);
-    }
-    console.log(result);
-
-}
-
-let Arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-console.log(Matrix(Arr, 3)); */
-
 /* let matrix = (n) => {
 
     let result = [];
@@ -182,8 +163,12 @@ console.log(matrix(3)); */
 // 11. Write a JS function which will take an array of numbers stored and find the second lowest and second greatest numbers, respectively. 
 
 /* let SecondLargeSmall = (Arr) => {
-    Arr.sort();
+    Arr.sort(compareNumbers);
+    console.log(Arr);
     return `Second Lowest ${Arr[1]} And Second Greatest ${Arr[Arr.length - 2]} `;
+}
+let compareNumbers = (a, b) => {
+    return a - b;
 }
 let Arr = [11, 22, 33, 44, 55, 88, 99, 32, 45, 67, 12, 34, 67, 89, 101, 345]
 console.log(SecondLargeSmall(Arr)); */
@@ -294,10 +279,8 @@ console.log(Power(number, pow)); */
 /* let uniqueChar = (String) => {
     let result = "";
     for (let i of String) {
-        console.log(i);
         if (result.match(i) != i) {
             result += i;
-            console.log(result);
         }
     }
     return result;
@@ -339,6 +322,34 @@ console.log(Occurrences('thequickbrownfoxjumpsoverthelazydog')); */
 
 // 18. Write a function for searching JS arrays with a binary search. 
 // Note : A binary search searches by splitting an array into smaller and smaller chunks until it finds the desired value.
+
+/* let binarySearch = (Arr, x) => {
+    Arr = sort(Arr);
+    let start = 0, end = Arr.length - 1;
+    while (start <= end) {
+        let mid = Math.floor((start + end) / 2);
+        if (Arr[mid] == x) return true;
+        else if (Arr[mid] < x)
+            start = mid + 1;
+        else
+            end = mid - 1;
+    }
+    return false;
+}
+let sort = (Arr) => {
+    Arr.sort(compareNumbers);
+    return Arr;
+}
+let compareNumbers = (a, b) => {
+    return a - b;
+}
+
+let Arr = [12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213];
+
+if (binarySearch(Arr, 9))
+    console.log("Element found...!");
+else
+    console.log("Element not found...!"); */
 
 /*******************************************************************************************************************************************************************************************************************/
 
@@ -410,6 +421,22 @@ console.log(firstNotRepeat("abacddbec")); */
 // Sample array : [12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213]
 // Expected output : [3223, 546, 455, 345, 234, 213, 122, 98, 84, 64, 23, 12, 9, 4, 1]
 
+/* function bubbleSort(arr) {
+
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < (arr.length - i - 1); j++) {
+            if (arr[j] < arr[j + 1]) {
+                let temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+            }
+        }
+    }
+    return arr;
+}
+let arr = [12, 345, 4, 546, 122, 84, 98, 64, 9, 1, 3223, 455, 23, 234, 213]
+console.log(bubbleSort(arr)); */
+
 /*******************************************************************************************************************************************************************************************************************/
 
 
@@ -434,6 +461,18 @@ console.log(Longest_Country_Name()); */
 /*******************************************************************************************************************************************************************************************************************/
 
 // 26. Write a JS function to find a substring in a given a string without repeating characters. 
+/* let uniqueChar = (String) => {
+    let result = "";
+    for (let i of String) {
+        if (result.match(i) != i) {
+            result += i;
+        }
+    }
+    return result;
+}
+let str = "thequickbrownfoxjumpsoverthelazydog"
+console.log(`Input : ${str}`);
+console.log(`Output : ${uniqueChar(str)}`); */
 
 /*******************************************************************************************************************************************************************************************************************/
 
@@ -468,6 +507,14 @@ console.log(longestPlindrom("nannoonisredder")); */
 /*******************************************************************************************************************************************************************************************************************/
 
 // 28. Write a JS program to pass a 'JS function' as parameter. 
+/* let sum = (n1, n2) => {
+    return n1 + n2;
+
+}
+let total = (number1, number2, callback) => {
+    return callback(number1, number2);
+}
+console.log(total(10, 20, sum)); */
 
 /*******************************************************************************************************************************************************************************************************************/
 
