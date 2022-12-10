@@ -1,0 +1,79 @@
+<!--
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DOM Manipulations</title>
+    </head>
+    <body>
+        <p id="my_paragraph">Angular11</p>
+        <button id="my_btn">ClickMe</button>
+        <script>
+            let p = document.getElementById("my_paragraph");
+           
+            let btn = document.getElementById("my_btn");
+            btn.addEventListener("click",()=>{
+               if(p.innerText === "Angular11"){
+                   alert("Succcess");
+               }else{
+                   alert("Fail");
+               }
+            });
+        </script>
+    </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+    <div id="parent" style="width: 300px;height: 300px;border: 1px solid red;color: red;text-align: center;">
+        parent
+        <div id="child" style="width: 200px;height: 200px;border: 1px solid green;color: green;text-align: center;margin: 20px;">
+            child
+            <div id="subchild" style="width: 100px;height: 100px; border: 1px solid blue;color: blue;margin: 20px;text-align: center;">
+                subchild
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <fieldset>
+        <legend>Login Form</legend>
+        <input type="text" id="uname">
+        <br><br>
+        <input type="password" id="upwd">
+        <br><br>
+        <button id="my_btn">Login</button>
+    </fieldset>     -->
+<!-- <script>
+        let uname = document.getElementById("uname");
+        let upwd = document.getElementById("upwd");
+
+        let my_btn = document.getElementById("my_btn");
+
+        my_btn.addEventListener("click",()=>{
+            if(uname.value === "skill" && upwd.value === "qode"){
+                alert("Success");
+            }else{
+                alert("Fail");
+            }
+        });
+    </script> -->
+
+<script>
+    let parent = document.querySelector("#parent");
+    let child = document.querySelector("#child");
+    let subchild = document.querySelector("#subchild");
+
+    parent.addEventListener("click", () => {
+        console.log("parent");
+    }, false);
+
+    child.addEventListener("click", () => {
+        console.log("child");
+    }, false);
+
+    subchild.addEventListener("click", () => {
+        console.log("subchild");
+    }, false);
+</script>
+
+</html>

@@ -157,6 +157,25 @@ console.log(TypeArg("Vrushabh")) */
 let Arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 console.log(Matrix(Arr, 3)); */
 
+/* let matrix = (n) => {
+
+    let result = [];
+    for (let i = 0; i < n; i++) {
+        let Arr = [];
+        for (let j = 0; j < n; j++) {
+            if (i == j) {
+                Arr.push(1);
+            }
+            else {
+                Arr.push(0);
+            }
+        }
+        result.push(Arr);
+    }
+    return result;
+}
+console.log(matrix(3)); */
+
 /*******************************************************************************************************************************************************************************************************************/
 
 
@@ -289,7 +308,7 @@ console.log(uniqueChar("thequickbrownfoxjumpsoverthelazydog")); */
 // 17. Write a JS function to  get the number of occurrences of each letter in specified string. 
 
 // let Occurrences = (String) => {
-    // String = String.toLowerCase().split("").sort().join("");
+// String = String.toLowerCase().split("").sort().join("");
 /*     let result = [];
     for (let i of String) {
         let Arr = [];
@@ -325,6 +344,15 @@ console.log(Occurrences('thequickbrownfoxjumpsoverthelazydog')); */
 
 // 19. Write a JS function that returns array elements larger than a number. 
 
+/* let larger = (number) => {
+    return Arr.filter(x => x > number)
+}
+let Arr = [];
+for (let i = 0; i < 10; i++) {
+    Arr.push(Math.floor(Math.random() * 10))
+}
+console.log(larger(3)); */
+
 /*******************************************************************************************************************************************************************************************************************/
 
 // 20. Write a JS function that generates a string id (specified length) of random characters. 
@@ -336,15 +364,44 @@ console.log(Occurrences('thequickbrownfoxjumpsoverthelazydog')); */
 // Sample array : [1, 2, 3] and subset length is 2
 // Expected output : [[2, 1], [3, 1], [3, 2], [3, 2, 1]]
 
+/* function PossibleCom(Arr) {
+    let CombinationArr = [];
+    for (let i = 0; i < Arr.length; i++) {
+        for (let j = i + 2; j < Arr.length + 1; j++) {
+            CombinationArr.push(Arr.slice(i, j));
+        }
+    }
+    return CombinationArr;
+}
+let Arr = [1, 2, 3]
+console.log(PossibleCom(Arr)); */
+
 /*******************************************************************************************************************************************************************************************************************/
 
 // 22. Write a JS function that accepts two arguments, a string and a letter and the function will count the number of occurrences of the specified letter within the string. 
+
+/* let count = (string, char) => {
+    let Result = [...string.matchAll(char)]
+    return Result.length;
+}
+console.log(count("thequickbrownfoxjumpsoverthelazydog", "o")); */
 
 /*******************************************************************************************************************************************************************************************************************/
 
 // 23. Write a JS function to find the first not repeated character. 
 // Sample arguments : 'abacddbec'
 // Expected output : 'e'
+
+/* let firstNotRepeat = (string) => {
+    let temp = [];
+    for (let i of string) {
+        temp = [...string.matchAll(i)].flat();
+        if (1 == temp.length) {
+            return i;
+        }
+    }
+}
+console.log(firstNotRepeat("abacddbec")); */
 
 /*******************************************************************************************************************************************************************************************************************/
 
@@ -360,6 +417,20 @@ console.log(Occurrences('thequickbrownfoxjumpsoverthelazydog')); */
 // Sample function : Longest_Country_Name(["Australia", "Germany", "United States of America"])
 // Expected output : "United States of America"
 
+
+/* let Longest_Country_Name = () => {
+    let largerLength = Arr[0].length;
+    for (let i of Arr) {
+        if (i.length > largerLength) {
+            largerLength = i.length;
+        }
+    }
+    return Arr.filter(x => x.length == largerLength);
+}
+let Arr = ["Australia", "Germany", "United States of America"];
+console.log(Longest_Country_Name()); */
+
+
 /*******************************************************************************************************************************************************************************************************************/
 
 // 26. Write a JS function to find a substring in a given a string without repeating characters. 
@@ -367,6 +438,32 @@ console.log(Occurrences('thequickbrownfoxjumpsoverthelazydog')); */
 /*******************************************************************************************************************************************************************************************************************/
 
 // 27. Write a JS function that returns the longest palindrome in a given string. 
+
+/* let longestPlindrom = (string) => {
+    let result = [];
+    for (let i = 0; i < string.length; i++) {
+        for (let j = i + 2; j < string.length + 1; j++) {
+            let x = string.slice(i, j);
+            let y = string.slice(i, j).split("").reverse().join('');
+            if (x == y) {
+                result.push(x);
+            }
+        }
+    }
+    return check(result);
+}
+let check = (Arr) => {
+    let largerLength = Arr[0].length;
+    for (let i of Arr) {
+        if (i.length > largerLength) {
+            largerLength = i.length;
+        }
+    }
+    return Arr.filter(x => x.length == largerLength);
+}
+console.log(longestPlindrom("nannoonisredder")); */
+
+
 
 /*******************************************************************************************************************************************************************************************************************/
 

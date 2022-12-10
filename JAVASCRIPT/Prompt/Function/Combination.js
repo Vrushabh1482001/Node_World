@@ -99,3 +99,9 @@ function combination(str) {
 }
 
 console.log(combination("Vrushabh"));  */
+
+
+if ([1, 1, 1] == [1]) {
+    console.log("insiede if");
+}
+else { console.log("insiede else"); }
