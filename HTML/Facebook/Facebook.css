@@ -1,0 +1,98 @@
+.img {
+    background-image: url("mount.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.box {
+    background-color: #D3D3D3;
+    height: 250px;
+    width: 341px;
+    padding: 50px;
+    border: 1px solid black;
+    margin: 1px 25px 50px 800px;
+    opacity: 0.6;
+    border-radius: 20px;
+}
+
+#terms1 {
+    font-size: 11px;
+    color: #777;
+    width: 316px;
+    margin: 11px 0 11px;
+}
+
+.navbar {
+    background-color: #D3D3D3;
+    margin: 0 auto;
+    width: 1300px;
+    height: 100px;
+    opacity: 0.6;
+    border-radius: 10px;
+}
+
+
+.tablerightside {
+    float: right;
+    margin-top: 15px;
+}
+
+.logo {
+    font-size: 50px;
+    display: block;
+    padding: 30px;
+    color: blue;
+}
+
+.button1 {
+    position: relative;
+    width: 45px;
+    height: 18px;
+    background-color: blue;
+    border: 1px solid #999;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.button2 {
+    position: relative;
+    width: 45px;
+    height: 18px;
+    background-color: green;
+    border: 1px solid #999;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+.signup {
+
+    font-size: 36px;
+    font-weight: 700;
+    margin: 90px 366px 1px 820px;
+}
+
+.leftside {
+    float: left;
+    margin-left: 150px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.leftsidedetail {
+    float: left;
+    margin-left: 130px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.celebrity {
+    color: #666;
+    font-size: 13px;
+    font-weight: bold;
+}
