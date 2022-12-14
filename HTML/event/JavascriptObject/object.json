@@ -1,0 +1,38 @@
+{
+  "student0": [
+    {
+      "Name": "Satasiya Vrushabh",
+      "Age": 22,
+      "Course": "Node Js",
+      "MobileNo": 7069182001
+    }
+  ],
+  "student1": [
+    {
+      "Name": "Keyur Padmani",
+      "Age": 22,
+      "Course": "Flutter",
+      "MobileNo": 8877665544
+    }
+  ],
+  "student2": {
+    "Name": "Krunal Sojitra",
+    "Age": 21,
+    "Course": "c++",
+    "MobileNo": 7069182001
+  },
+  "student3": {
+    "Name": "Yash Dhameliya",
+    "Age": 22,
+    "Course": "Python",
+    "MobileNo": 9974099876
+  },
+  "student4": {
+    "Name": "Neel",
+    "Age": 26,
+    "Course": "Data Structure",
+    "MobileNo": 9909045678
+  }
+}
+// json-server --watch object.json
+// sudo npm install -g json-server
