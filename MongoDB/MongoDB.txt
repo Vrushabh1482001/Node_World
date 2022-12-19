@@ -47,8 +47,7 @@ any programming language without any conversion (interoperability)
 MongoDB Shell vs MongoDB Server:
 --------------------------------
 Once we installed MongoDB, we will get MongoDB Shell and MongoDB
-Server.hese are Javascript based applicatio
-Tns.
+Server.hese are Javascript based applications.
 MongoDB Server is responsible to store our data in database. --> mongod
 MongoDB Shell is responsible to manage Server.               --> mongosh   
 
@@ -143,3 +142,56 @@ db.collection.findOne() --->To get one document
  {name:"Sonny", age:"28", status:"away"},
  {name:"Cher", age:"20", status:"online"}
 ])
+
+
+=>db.CLIENT_MASTER.find().pretty({}).skip(3)
+[
+  {
+    _id: ObjectId("639c671ce6de05ba17461155"),
+    Clientno: 'C00004',
+    Name: 'Basu',
+    address1: 'p-7 Bandra',
+    city: 'Bombay',
+    pincode: 400056,
+    state: 'Maharashtra',
+    baldue: 0
+  },
+  {
+    _id: ObjectId("639c671ce6de05ba17461156"),
+    Clientno: 'C00005',
+    Name: 'Ravi',
+    address1: 'C-42 agra',
+    city: 'Delhi',
+    pincode: 100001,
+    state: 'Delhi',
+    baldue: 2000
+  },
+  {
+    _id: ObjectId("639c671ce6de05ba17461157"),
+    Clientno: 'C00006',
+    Name: 'Rukmini',
+    address1: 'A/5 Juhu',
+    city: 'Bombay',
+    pincode: 400050,
+    state: 'Maharashtra',
+    baldue: 0
+  }
+]
+
+db.CLIENT_MASTER.find({}).sort({"Name" : 1})
+db.CLIENT_MASTER.find({}).sort({"Name" : -1})
+
+db.CLIENT_MASTER.find().count()
+
+db.CLIENT_MASTER.find({"Key":"Value"})
+
+$eq,$ne,$gt,$gte,$lt,$lte,$in,$nariman
+db.collection.find({field : {$eq : Value}})
+db.collection.find({field : Value})
+
+db.CLIENT_MASTER.find({"baldue" : {$in :[2000,0]}})
+
+$or,$nor,$and,$not
+
+db.collection.find({$and:[{expression1},{expression2}..........]})
+db.CLIENT_MASTER.find({$or:[{"baldue":{$ne:0}},{"state":{$in:["Maharashra"]}}]})
