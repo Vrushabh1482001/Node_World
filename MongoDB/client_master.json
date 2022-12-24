@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7b6"
+  },
+  "Clientno": "C00001",
+  "Name": "Ivan",
+  "address1": "A/14 worli",
+  "city": "Bombay",
+  "pincode": 400054,
+  "state": "Maharashtra",
+  "baldue": 15000
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7b7"
+  },
+  "Clientno": "C00002",
+  "Name": "Vandana",
+  "address1": "B-23 vesu ",
+  "city": "Madras",
+  "pincode": 780001,
+  "state": "Tamilnadu",
+  "baldue": 0
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7b8"
+  },
+  "Clientno": "C00003",
+  "Name": "Pramada",
+  "address1": "65,nariman",
+  "city": "Bombay",
+  "pincode": 400057,
+  "state": "Maharashtra",
+  "baldue": 5000
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7b9"
+  },
+  "Clientno": "C00004",
+  "Name": "Basu",
+  "address1": "p-7 Bandra",
+  "city": "Bombay",
+  "pincode": 400056,
+  "state": "Maharashtra",
+  "baldue": 0
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7ba"
+  },
+  "Clientno": "C00005",
+  "Name": "Ravi",
+  "address1": "C-42 agra",
+  "city": "Delhi",
+  "pincode": 100001,
+  "state": "Delhi",
+  "baldue": 2000
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7bb"
+  },
+  "Clientno": "C00006",
+  "Name": "Rukmini",
+  "address1": "A/5 Juhu",
+  "city": "Bombay",
+  "pincode": 400050,
+  "state": "Maharashtra",
+  "baldue": 0
+}]

@@ -1,0 +1,15 @@
+Q1) Select all documents from books collection, where no_of_reviews  is 3.
+Q2) Select all documents from the books collection where author profile contains 2 courses?
+Q3) Read all documents from the books collection where 'tags' array contains 'database' element?
+Q4) Select all documents from books collection where tags array is exactly equal to ["language","freeware","programming"].
+Q5) To select all documents from books collection where no_of_reviews is not equal to 3.
+Q6) Select all documents from books collection where the no_of_reviews is greater than 3.
+Q7) Select all documents from books collection where the no_of_reviews is greater than or equal to 3.
+Q8) Select all documents from books collection where the no_of_reviews is less than 3.
+Q9) Select all documents from the books collection where the no_of_reviews is 1 or 4 or 5?
+Q10) Select all documents where either no_of_reviews >3 or tags array contains programming element?
+Q11) Select all documents where either no_of_reviews is less than 3 or downloadable is true or author profile contains atleast 2 books?
+Q11) Select all documents does not conain no_of_reviews and downloadable fields Note: $or results + $nor results = total no of documents
+Q13) Select all documents where the no_of_reviews is greater than or equals to 3 and downloadable is true?
+
+

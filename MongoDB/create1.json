@@ -1,0 +1,30 @@
+[
+    {
+        "double1": 1
+    },
+    {
+        "string2": "vrushabh"
+    },
+    {
+        "object3": "vrushabh"
+    },
+    {
+        "array4": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+        ]
+    },
+    {
+        "bollean8": true
+    }
+]

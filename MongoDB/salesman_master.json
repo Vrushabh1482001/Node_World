@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7bc"
+  },
+  "salesman_no": "S00001",
+  "salesmanname": "Kiran",
+  "address": "A/14 worli",
+  "city": "Bombay",
+  "pincode": 400002,
+  "state": "Mah",
+  "salamt": 3000,
+  "tgttoget": 100,
+  "ytdsale": 50,
+  "remark": "Good"
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7bd"
+  },
+  "salesman_no": "S00002",
+  "salesmanname": "Manish",
+  "address": "65,nariman",
+  "city": "Bombay",
+  "pincode": 400001,
+  "state": "Mah",
+  "salamt": 3000,
+  "tgttoget": 200,
+  "ytdsale": 100,
+  "remark": "Good"
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7be"
+  },
+  "salesman_no": "S00003",
+  "salesmanname": "Ravi",
+  "address": "p-7 Bandra",
+  "city": "Bombay",
+  "pincode": 400032,
+  "state": "Mah",
+  "salamt": 3000,
+  "tgttoget": 200,
+  "ytdsale": 100,
+  "remark": "Good"
+},{
+  "_id": {
+    "$oid": "63a27d0d1a1cb5c07fd9a7bf"
+  },
+  "salesman_no": "S00004",
+  "salesmanname": "Ashish",
+  "address": "A/5 Juhu",
+  "city": "Bombay",
+  "pincode": 400044,
+  "state": "Mah",
+  "salamt": 3500,
+  "tgttoget": 200,
+  "ytdsale": 150,
+  "remark": "Good"
+}]

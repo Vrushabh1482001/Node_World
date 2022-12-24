@@ -1,4 +1,5 @@
-
+mongodb+srv://admin:<password>@cluster0.hqhlmez.mongodb.net/test
+`mongosh "mongodb+srv://cluster0.hqhlmez.mongodb.net/myFirstDatabase" --apiVersion 1 --username admin`
 
 MongoDB is a source-available cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with optional schemas.
 
@@ -144,39 +145,9 @@ db.collection.findOne() --->To get one document
 ])
 
 
-=>db.CLIENT_MASTER.find().pretty({}).skip(3)
-[
-  {
-    _id: ObjectId("639c671ce6de05ba17461155"),
-    Clientno: 'C00004',
-    Name: 'Basu',
-    address1: 'p-7 Bandra',
-    city: 'Bombay',
-    pincode: 400056,
-    state: 'Maharashtra',
-    baldue: 0
-  },
-  {
-    _id: ObjectId("639c671ce6de05ba17461156"),
-    Clientno: 'C00005',
-    Name: 'Ravi',
-    address1: 'C-42 agra',
-    city: 'Delhi',
-    pincode: 100001,
-    state: 'Delhi',
-    baldue: 2000
-  },
-  {
-    _id: ObjectId("639c671ce6de05ba17461157"),
-    Clientno: 'C00006',
-    Name: 'Rukmini',
-    address1: 'A/5 Juhu',
-    city: 'Bombay',
-    pincode: 400050,
-    state: 'Maharashtra',
-    baldue: 0
-  }
-]
+
+
+db.CLIENT_MASTER.find().pretty({}).skip(3)
 
 db.CLIENT_MASTER.find({}).sort({"Name" : 1})
 db.CLIENT_MASTER.find({}).sort({"Name" : -1})
@@ -195,3 +166,18 @@ $or,$nor,$and,$not
 
 db.collection.find({$and:[{expression1},{expression2}..........]})
 db.CLIENT_MASTER.find({$or:[{"baldue":{$ne:0}},{"state":{$in:["Maharashra"]}}]})
+
+
+db.collection_name.update({Selection_data},{$set{updated_data}})
+db.PRODUCT_MASTER.update({productno:"P08865"},{$set:{GST:"18"}})
+
+
+
+
+db.books.find({"double1" : {$type : "int" }})
+
+
+****************************************************************************************************************************************************
+
+
+show dbs
