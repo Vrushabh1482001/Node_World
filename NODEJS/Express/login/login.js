@@ -1,7 +1,7 @@
 const express = require("express");
 login = express.Router();
 login.use(express.json());
-login.use(express.urlencoded());
+login.use(express.urlencoded())
 
 
 login.get("/", (req, res) => {
