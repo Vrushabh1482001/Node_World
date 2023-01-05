@@ -1,11 +1,12 @@
 const express = require("express");
-dashbord = express.Router();
+dashboard = express.Router();
 
-dashbord.use(express.json());
-dashbord.use(express.urlencoded());
+dashboard.use(express.json());
+dashboard.use(express.urlencoded());
 
-dashbord.get("/dashbord", (req, res) => {
-    res.json({ "msg": "you are in dashbord" });
-})
+dashboard.get("/", (req, res) => {
+    console.log("you in dashboard");
+    res.json({ "msg": "you are in dashboard" });
+});
 
-module.exports = dashbord;
+module.exports = dashboard;

@@ -22,11 +22,15 @@ login.post("/singup", (req, res) => {
     if (id == pwd) {
         console.log({ "msg": "in process" });
         const dashboard = require("./dashboard");
-        login.use("/dashboard", dashboard);
+        login.use("/", dashboard);
     }
     else {
         console.log({ "msg": "error" });
-        res.redirect('/singup');
+        login.use('/', (req, res, next) => {
+            console.log("Redirect");
+            res.redirect('/singup');
+            next();
+        });
 
     }
 });
