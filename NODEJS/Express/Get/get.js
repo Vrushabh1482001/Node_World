@@ -7,8 +7,8 @@ app.get("/", (req, res) => {
     res.json({ msg: "Defult" });
 });
 
-const login = require("./login");
-app.use("/login", login);
+const login = require("./getlogin");
+app.use("/getlogin", getlogin);
 
 
 // http://localhost:5050/singup?uname=skill&upwd=qode

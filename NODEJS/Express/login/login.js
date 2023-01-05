@@ -20,10 +20,14 @@ login.post("/singup", (req, res) => {
     console.log(id);
     console.log(pwd);
     if (id == pwd) {
-        res.json({ "msg": "in process" });
+        console.log({ "msg": "in process" });
+        const dashboard = require("./dashboard");
+        login.use("/dashboard", dashboard);
     }
     else {
-        res.json({ "msg": "error" });
+        console.log({ "msg": "error" });
+        res.redirect('/singup');
+
     }
 });
 

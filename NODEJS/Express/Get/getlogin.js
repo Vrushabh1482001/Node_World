@@ -1,15 +1,15 @@
 const express = require("express");
-login = express.Router();
-login.use(express.json());
-login.use(express.urlencoded())
+getlogin = express.Router();
+getlogin.use(express.json());
+getlogin.use(express.urlencoded())
 
 
-login.get("/", (req, res) => {
+getlogin.get("/", (req, res) => {
     res.json({ 'msg': "inside a login" })
 });
 
 // http://localhost:5050/login/singup?id=skill&upwd=qode
-login.get("/singup", (req, res) => {
+getlogin.get("/singup", (req, res) => {
     let query = req.query;
     console.log(query);
     console.log(query.uname);
@@ -19,7 +19,7 @@ login.get("/singup", (req, res) => {
 
 
 
-// login.get("/singup/:id/:upwd", (req, res) => {
+// getlogin.get("/singup/:id/:upwd", (req, res) => {
 //     let data = req.params
 //     console.log(data);
 //     console.log(data.id);
@@ -27,5 +27,5 @@ login.get("/singup", (req, res) => {
 //     res.json({ "username": "id", "password": "upwd" });
 // });
 
-module.exports = login;
+module.exports = getlogin;
 
