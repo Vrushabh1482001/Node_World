@@ -1,15 +1,10 @@
-const express = require("express");
-const tokenObj = require("../Token/token");
-module1 = express.Router()
+const express = require('express');
+const middleware = require('../Middleware/middleware')
+module1 = express.Router();
 
-module1.post("/", (req, res) => {
-    const headToken = req.headers.token;
-    if (headToken == tokenObj.token) {
-        res.json({ "msg": "inside module1 success", "token": tokenObj.token });
-    }
-    else {
-        res.json({ "msg": "fail in module1" });
-    }
+
+module1.post('/', [middleware], (req, res) => {
+    res.json({ "msg": "inside module1 success" });
 });
 
 module.exports = module1;

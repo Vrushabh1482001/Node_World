@@ -1,5 +1,5 @@
 const tokenObj = {
-    token : ""
+    token: ""
 };
 
-module.exports=tokenObj;
+module.exports = tokenObj;

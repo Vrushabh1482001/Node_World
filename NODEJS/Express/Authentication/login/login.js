@@ -1,6 +1,6 @@
 const express = require("express");
 const jwtToken = require("jwt-simple");
-const tokenObj = require("../Token/token");
+const tokenObj = require('../Token/token');
 login = express.Router();
 
 

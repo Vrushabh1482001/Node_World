@@ -1,18 +1,19 @@
 const express = require('express');
 const app = express();
-const PORT = 5050;
+const port = 5050;
+app.use(express.json());
+app.use(express.urlencoded());
 
-app.get("/", (req, res) => {
-    res.json({ "msg": "Welcome server" });
-})
+app.get('/', (req, res) => {
+    res.json({ msg: "Defult server....!" });
+});
 
-const login = require("./Login/login");
-app.use("/login", login);
+app.use('/login', require('./Login/login'));
 
-const module1 = require("./Module1/module1");
-app.use("/module1", module1);
+app.use('/module1', require('./Module/module1'));
+app.use('/module2', require('./Module/module2'));
+app.use('/module3', require('./Module/module3'));
 
-
-app.listen(PORT, () => {
-    console.log(`server conected ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server listening Port : ${port}`);
 });
