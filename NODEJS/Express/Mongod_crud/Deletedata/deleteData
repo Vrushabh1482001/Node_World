@@ -16,7 +16,6 @@ deleteData.delete('/', (req, res) => {
                 { _id: req.body.id }, (err, result) => {
                     if (err) throw err;
                     else {
-
                         res.json({ "insert": "Delete Success.....!" });
                     }
                 });
