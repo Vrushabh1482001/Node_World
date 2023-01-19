@@ -15,9 +15,7 @@ insertData.get('/', (req, res) => {
 
 
 insertData.post('/users', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    Users.insertMany(data, (err, result) => {
+    Users.insertMany(req.body, (err, result) => {
         if (err) throw err;
         else {
             res.json({ "msg": "insert Success...!" });
