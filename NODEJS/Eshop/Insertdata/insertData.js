@@ -15,33 +15,9 @@ insertData.get('/', (req, res) => {
 
 
 insertData.post('/users', (req, res) => {
-    /* const data = {
-        id: req.body.id,
-        name: req.body.name,
-        email: req.body.email,
-        passwordHash: req.body.passwordHash,
-        street: req.body.street,
-        apartment: req.body.apartment,
-        city: req.body.city,
-        zip: req.body.zip,
-        country: req.body.country,
-        phone: req.body.phone,
-        isAdmin: req.body.isAdmin
-    }; */
-    console.log(req.body);
-    Users.insertMany({
-        id: req.body.id,
-        name: req.body.name,
-        email: req.body.email,
-        passwordHash: req.body.passwordHash,
-        street: req.body.street,
-        apartment: req.body.apartment,
-        city: req.body.city,
-        zip: req.body.zip,
-        country: req.body.country,
-        phone: req.body.phone,
-        isAdmin: req.body.isAdmin
-    }, (err, result) => {
+    const data = req.body;
+    console.log(data);
+    Users.insertMany(data, (err, result) => {
         if (err) throw err;
         else {
             res.json({ "msg": "insert Success...!" });
@@ -50,27 +26,43 @@ insertData.post('/users', (req, res) => {
 
 });
 
-/* insertData.post('/products', (req, res) => {s
-    const result = Products.insertMany(req.body);
-    res.send(result);
-});
-
-
 insertData.post('/category', (req, res) => {
-    const result = Category.insertMany(req.body);
-    res.send(result);
+    const result = Category.insertMany(req.body, (err, result) => {
+        if (err) throw err;
+        else {
+            res.json({ "msg": "insert Success...!" });
+        }
+    });
 });
+
+insertData.post('/products', (req, res) => {
+    Products.insertMany(req.body, (err, result) => {
+        if (err) throw err;
+        else {
+            res.json({ "msg": "insert Success...!" });
+        }
+    });
+});
+
 
 insertData.post('/orders', (req, res) => {
-    const result = Orders.insertMany(req.body);
-    res.send(result);
+    const result = Orders.insertMany(req.body, (err, result) => {
+        if (err) throw err;
+        else {
+            res.json({ "msg": "insert Success...!" });
+        }
+    });
 });
 
 
 insertData.post('/orderitems', (req, res) => {
-    const result = Orderitems.insertMany(req.body);
-    res.send(result);
-}); */
+    const result = Orderitems.insertMany(req.body, (err, result) => {
+        if (err) throw err;
+        else {
+            res.json({ "msg": "insert Success...!" });
+        }
+    });
+});
 
 
 module.exports = insertData;

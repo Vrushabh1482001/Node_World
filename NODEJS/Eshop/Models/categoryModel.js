@@ -11,3 +11,12 @@ const categorySchema = new mongoose.Schema({
 const Category = mongoose.model('Category', categorySchema);
 
 module.exports = Category;
+
+
+/* {
+    "id": "C0001",
+        "name": "Laptop",
+            "color": "Black",
+                'icon': "path",
+                    "image": "path"
+} */

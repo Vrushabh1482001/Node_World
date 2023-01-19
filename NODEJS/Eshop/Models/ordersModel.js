@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const ordersSchema = new mongoose.Schema({
-    id: { type: Object, required: true },
+    id: { type: String, required: true },
     orderiterms: { type: Array, required: true },
-    shippingAddress1: { type: Boolean, required: true },
-    shippingAddress1: { type: Boolean, required: true },
+    shippingAddress1: { type: String, required: true },
+    shippingAddress2: { type: String, required: true },
     city: { type: String, required: true },
     zip: { type: String, required: true },
     Country: { type: String, required: true },
@@ -18,3 +18,18 @@ const ordersSchema = new mongoose.Schema({
 const Orders = mongoose.model('Orders', ordersSchema);
 
 module.exports = Orders;
+
+/* {
+    "id": "O0001",
+        "orderiterms": ['P0001'],
+            "shippingAddress1": "SkillQode",
+                "shippingAddress2": "MicraSolution",
+                    "city": "Surat",
+                        "zip": "395010",
+                            "Country": "India",
+                                "phone": 9499556267,
+                                    "status": "Packed",
+                                        "totalPrice": 99999,
+                                            "user": "63c8c3641279ecf4e297efbc",
+                                                "dateOrdered": Date()
+} */
