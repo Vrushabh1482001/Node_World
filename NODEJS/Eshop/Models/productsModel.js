@@ -19,3 +19,19 @@ const productsSchema = new mongoose.Schema({
 const Products = mongoose.model('Products', productsSchema);
 
 module.exports = Products;
+
+{
+    "id": "P0001"
+    "name": "Macbook Air"
+    "description": "The MacBook Air has an anodized aluminum casing that is 0.16 inches at its thinnest point and 0.76 inches at its thickest. Often described as the same size as a pad of paper, the laptop has just one USB port, an audio headphone jack and built-in speakers and microphone."
+    "richdescription":
+    "image": ""
+    "images":
+    "brands":
+    "price":
+    "category":
+    "countInStock":
+    "rating":
+    "isFeatured":
+    "dataCreated":
+}   

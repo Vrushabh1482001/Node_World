@@ -6,6 +6,12 @@ const Products = require('../Models/productsModel');
 const Category = require('../Models/categoryModel');
 const Orders = require('../Models/ordersModel');
 const Orderitems = require('../Models/orderitemsModel');
+insertData.use(express.json());
+insertData.use(express.urlencoded());
+
+insertData.get('/', (req, res) => {
+    res.json({ 'msg': "default insertdata....!" })
+});
 
 
 insertData.post('/users', (req, res) => {
@@ -22,8 +28,8 @@ insertData.post('/users', (req, res) => {
         phone: req.body.phone,
         isAdmin: req.body.isAdmin
     }; */
-
-    Users.insertOne({
+    console.log(req.body);
+    Users.insertMany({
         id: req.body.id,
         name: req.body.name,
         email: req.body.email,
