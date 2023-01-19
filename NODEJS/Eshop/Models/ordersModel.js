@@ -21,7 +21,7 @@ module.exports = Orders;
 
 /* {
     "id": "O0001",
-        "orderiterms": ['P0001'],
+        "orderiterms": ["P0001"],
             "shippingAddress1": "SkillQode",
                 "shippingAddress2": "MicraSolution",
                     "city": "Surat",
@@ -30,6 +30,6 @@ module.exports = Orders;
                                 "phone": 9499556267,
                                     "status": "Packed",
                                         "totalPrice": 99999,
-                                            "user": "63c8c3641279ecf4e297efbc",
-                                                "dateOrdered": Date()
-} */
+                                            "user": "63c8d19c90e8188aac67f724",
+                                                "dateOrdered": 20230119
+}*/

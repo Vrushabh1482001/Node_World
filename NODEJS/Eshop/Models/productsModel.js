@@ -29,9 +29,9 @@ module.exports = Products;
         "images": "Folder paths",
             "brands": "Apple",
                 "price": 99999,
-                    "category":
+                    "category": "63c8d24a90e8188aac67f726",
     "countInStock": 999,
     "rating": 5,
     "isFeatured": true,
-    "dataCreated": Date(),
-}    */
+    "dataCreated": 20230119
+}   */
