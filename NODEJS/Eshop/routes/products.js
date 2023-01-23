@@ -8,15 +8,15 @@ router.use(express.json());
 router.use(express.urlencoded());
 
 
-router.get('/', (req, res) => {
-
-    Products.find({}, (err, result) => {
-        if (err) throw err;
-        else {
-            res.send(result);
-        }
-    });
+router.get('/:id', async (req, res) => {
+    const product = await Products.findById(req.params.id);
+    if (!product) {
+        res.status(500).json({ massage: "The Product with the give Id was not found....!" });
+    }
+    res.status(200).send(product);
 });
+
+
 
 router.post('/', async (req, res) => {
     const category = await Category.findById(req.body.category);
@@ -44,23 +44,34 @@ router.post('/', async (req, res) => {
 
 });
 
-router.put('/', (req, res) => {
-    Products.updateOne(req.body.select, { $set: req.body.update }, (err, result) => {
-        if (err) throw err;
-        else {
-            res.send(result);
-        };
-    });
+router.put('/:id', async (req, res) => {
+    const product = await Products.findByIdAndUpdate(req.params.id,
+        {
+            name: req.body.name,
+            description: req.body.description,
+            richdescription: req.body.richdescription,
+            image: "ImagePath",
+            images: "ImagesPath",
+            brand: req.body.brand,
+            price: req.body.price,
+            category: req.body.category,
+            countInStock: req.body.countInStock,
+            rating: req.body.rating,
+            isFeatured: req.body.isFeatured,
+            dataCreated: req.body.dataCreated,
 
+        }, { new: true });
+
+    if (!product) return res.status(500).send("The Product cannot be Update.....!");
+    res.send(product);
 });
 
-router.delete('/', (req, res) => {
-    Products.deleteOne(req.body, (err, result) => {
-        if (err) throw err;
-        else {
-            res.send(result);
-        };
-    });
+router.delete('/:id', async (req, res) => {
+
+    const product = await Products.findByIdAndRemove(req.params.id);
+
+    if (!product) return res.status(500).send("The Products cannot be deleted.....!");
+    res.send({ massage: "The Product is deleted" });
 });
 
 
