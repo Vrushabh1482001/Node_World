@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
         isAdmin: req.body.isAdmin,
     });
 
-    user = await users.save();
+    user = await user.save();
     if (!user) return res.status(500).send("The Users cannot be created.....!");
     res.send(user);
 
