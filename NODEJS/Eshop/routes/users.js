@@ -2,16 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Users = require('../Models/usersModel');
-
+const jwt = require("jsonwebtoken");
 router.use(express.json());
 router.use(express.urlencoded());
+const bcrypt = require('bcrypt');
 
-/* router.get('/', async (req, res) => {
-    const userslist = await Users.find();
-
-    if (method) Response < any, Record < String, any >, number > .status(code : renumber): Response < any, Record < String, any >, number > Set status code.res.status(200).send(userslist);
-});
- */
 
 router.get('/:id', async (req, res) => {
     const user = await Users.findById(req.params.id);
@@ -21,12 +16,33 @@ router.get('/:id', async (req, res) => {
     res.status(200).send(user);
 });
 
+router.post("/login", async (req, res) => {
+    const user = await Users.findOne({ email: req.body.email });
+    const secret = process.env.SECRET;
+    if (!user) {
+        return res.status(400).send("The user not found");
+    }
+    if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+        const token = jwt.sign(
+            {
+                userId: user.id,
+                isAdmin: user.isAdmin,
+            },
+            secret, { expiresIn: "1d" }
+        );
+        res.status(200).send({ user: user.email, token: token });
+    }
+    else {
+        res.status(400).send("Password is worng....!");
+    }
+});
+
 router.post('/', async (req, res) => {
 
     let user = new Users({
         name: req.body.name,
         email: req.body.email,
-        passwordHash: req.body.passwordHash,
+        passwordHash: bcrypt.hashSync(req.body.passwordHash, 10),
         street: req.body.street,
         apartment: req.body.apartment,
         city: req.body.city,

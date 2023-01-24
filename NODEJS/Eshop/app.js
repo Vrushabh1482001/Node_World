@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require("cors");
 const app = express();
+// const authJwt = require("./Helpers/jwt");
 require("dotenv/config");
 const PORT = process.env.PORT
 
@@ -19,10 +20,14 @@ app.use(morgan('tiny'))
 app.use(express.json());
 app.use(express.urlencoded());
 
+// Authentication 
+// app.use(authJwt);
+
 //Default
 app.get('/', (req, res) => {
     res.json({ 'msg': "default" });
 });
+
 
 
 // database connect
@@ -63,6 +68,8 @@ app.use('/deleteproducts', require('./routes/products'));
 app.use('/deleteorders', require('./routes/orders'));
 app.use('/deleteorderitems', require('./routes/orderitems'));
 
+// login
+app.use('/user', require('./routes/users'));
 
 //server Listen
 app.listen(PORT, () => {

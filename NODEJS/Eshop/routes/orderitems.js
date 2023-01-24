@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
         quantity: req.body.quantity
     });
 
-    orderitems = await Orderitems.Save();
+    orderitems = await Orderitems.save();
     if (!orderitems) return res.status(5000).send("The Orderitems cannot be created....!");
 });
 
