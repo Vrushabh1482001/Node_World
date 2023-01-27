@@ -8,9 +8,26 @@ const Orderitem = require("../Models/orderitemsModel");
 router.use(express.json());
 router.use(express.urlencoded());
 
+router.get('/', async (req, res) => {
+    const orderList = await Orders.find()
+        .populate("user", "name")
+        .sort({ dateOrdered: -1 });
+    if (!orderList) {
+        res.status(500).json({ success: fales });
+    }
+    res.send(orderList);
+});
 
-router.get('/:id', async (req, res) => {
-    const order = await Orders.findById(req.params.id);
+router.get('/byid/:id', async (req, res) => {
+    const order = await Orders.findById(req.params.id)
+        .populate("user", "name")
+        .populate({
+            path: "orderitems",
+            populate: {
+                path: "product",
+                populate: "category",
+            }
+        });
     if (!order) {
         res.status(500).json({ massage: "The Order with the give Id was not found....!" });
     }
@@ -62,27 +79,6 @@ router.post("/", async (req, res) => {
 
     res.status(200).send(order);
 });
-
-// router.post('/', async (req, res) => {
-//     const user = await Users.findById(req.body.user);
-//     if (!user) return res.status(400).send("Invalid User");
-//     let orders = new Orders({
-//         orderiterms: req.body.orderiterms,
-//         shippingAddress1: req.body.shippingAddress1,
-//         shippingAddress2: req.body.shippingAddress2,
-//         city: req.body.city,
-//         zip: req.body.zip,
-//         country: req.body.country,
-//         phone: req.body.phone,
-//         status: req.body.status,
-//         totalPrice: req.body.totalPrice,
-//         user: req.body.user
-//     });
-
-//     orders = await orders.save();
-//     if (!orders) return res.status(500).send("The Order cannot be created....!");
-
-// });
 
 router.put('/:id', async (req, res) => {
     const order = await Orders.findByIdAndUpdate(req.params.id,

@@ -6,6 +6,16 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded());
 
+router.get('/', async (req, res) => {
+    const categoryList = await Category.find()
+        .populate("name")
+        .sort({ name: -1 });
+    if (!categoryList) {
+        res.status(500).json({ success: fales });
+    }
+    res.send(categoryList);
+});
+
 
 router.get('/:id', async (req, res) => {
     const category = await Category.findById(req.params.id);

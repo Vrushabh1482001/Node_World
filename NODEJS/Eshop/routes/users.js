@@ -8,6 +8,16 @@ router.use(express.urlencoded());
 const bcrypt = require('bcrypt');
 
 
+router.get('/', async (req, res) => {
+    const userList = await Users.find()
+        .populate("name")
+        .sort({ name: -1 });
+    if (!userList) {
+        res.status(500).json({ success: fales });
+    }
+    res.send(userList);
+});
+
 router.get('/:id', async (req, res) => {
     const user = await Users.findById(req.params.id);
     if (!user) {

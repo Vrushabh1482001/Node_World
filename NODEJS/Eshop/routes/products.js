@@ -8,6 +8,17 @@ router.use(express.json());
 router.use(express.urlencoded());
 
 
+router.get('/', async (req, res) => {
+    const productList = await Products.find()
+        .populate("name", "category")
+        .sort({ category: 1 });
+    if (!productList) {
+        res.status(500).json({ success: fales });
+    }
+    res.send(productList);
+});
+
+
 router.get('/:id', async (req, res) => {
     const product = await Products.findById(req.params.id);
     if (!product) {

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ordersSchema = new mongoose.Schema({
-    orderiterms: [{ type: mongoose.Schema.Types.ObjectId, ref: "Orderitems", required: true }],
+    orderitems: [{ type: mongoose.Schema.Types.ObjectId, ref: "Orderitems", required: true }],
     shippingAddress1: { type: String, required: true },
     shippingAddress2: { type: String },
     city: { type: String, required: true },
