@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Users = require('../Models/usersModel');
+const Users = require('../../Eshop_Live/Models/usersModel');
 const jwt = require("jsonwebtoken");
 router.use(express.json());
 router.use(express.urlencoded());

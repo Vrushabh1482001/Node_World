@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 const authJwt = require("./Helpers/jwt");
 require("dotenv/config");
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5500;
 
 //cors
 app.use(cors());

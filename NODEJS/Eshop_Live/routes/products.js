@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Category = require('../Models/categoryModel');
+const Category = require('../../Eshop_Live/Models/categoryModel');
 const router = express.Router();
-const Products = require('../Models/productsModel');
+const Products = require('../../Eshop_Live/Models/productsModel');
 
 router.use(express.json());
 router.use(express.urlencoded());

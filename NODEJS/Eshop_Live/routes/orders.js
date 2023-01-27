@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Orders = require('../Models/ordersModel');
-const Users = require('../Models/usersModel');
-const Orderitem = require("../Models/orderitemsModel");
+const Orders = require('../../Eshop_Live/Models/ordersModel');
+const Users = require('../../Eshop_Live/Models/usersModel');
+const Orderitem = require("../../Eshop_Live/Models/orderitemsModel");
 
 router.use(express.json());
 router.use(express.urlencoded());
