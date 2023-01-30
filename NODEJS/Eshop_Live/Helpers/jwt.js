@@ -1,9 +1,11 @@
 const { expressjwt: jwt } = require("express-jwt");
+require("dotenv/config");
+
 const authJwt = () => {
     const SECRET = process.env.SECRET;
     // const api = process.env.API_URL;
     return jwt({
-        secret: "Vrushabh",
+        secret: SECRET,
         algorithms: ["HS256"],
         // isRevoked: isRevoked,
     })

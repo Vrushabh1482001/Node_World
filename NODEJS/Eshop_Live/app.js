@@ -14,7 +14,7 @@ app.options("*", cors());
 //strictQuery
 mongoose.pluralize(null);
 mongoose.set("strictQuery", true);
-app.use(morgan('tiny'))
+app.use(morgan('tiny'));
 
 //json
 app.use(express.json());
@@ -27,7 +27,6 @@ app.use(authJwt);
 app.get('/', (req, res) => {
     res.json({ 'msg': "default" });
 });
-
 
 
 // database connect
@@ -69,6 +68,7 @@ app.use('/deleteorders', require('./routes/orders'));
 
 // login
 app.use('/user', require('./routes/users'));
+
 
 //server Listen
 app.listen(PORT, () => {
