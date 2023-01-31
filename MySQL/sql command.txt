@@ -1,4 +1,6 @@
 open mysql shell => cli => Command Line Interface
+ mysql -u root -p
+
 1. \sql                         [\\switching to sql mode]
 2. \connect root@localhost:3309  [\\your ac]
 3. admin@123                     [\\password]

@@ -5,6 +5,7 @@ const cors = require("cors");
 const app = express();
 const authJwt = require("./Helpers/jwt");
 require("dotenv/config");
+const errorHandler = require("./Helpers/error-handler");
 const PORT = process.env.PORT
 
 //cors
@@ -21,7 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 // Authentication 
-app.use(authJwt);
+app.use(authJwt());
+app.use(errorHandler);
 
 //Default
 app.get('/', (req, res) => {
