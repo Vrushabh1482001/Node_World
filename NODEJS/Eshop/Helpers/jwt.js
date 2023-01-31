@@ -6,13 +6,13 @@ const authJwt = () => {
     ;
     return jwt({
         secret: SECRET,
-        algorithms: ["HS256"],
-        // isRevoked: isRevoked,
+        algorithms: ["HS256"]
     })
         .unless({
             path:
                 [
-                    "/user/login"
+                    "/users/login",
+                    "/users/register"
                 ]
         });
 
