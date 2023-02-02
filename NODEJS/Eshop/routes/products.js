@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const Category = require('../Models/categoryModel');
 const router = express.Router();
 const Products = require('../Models/productsModel');
+const multer = require("multer");
+const path = require("path");
 
 router.use(express.json());
 router.use(express.urlencoded());
 
-
+//Get Data
 router.get('/', async (req, res) => {
     const productList = await Products.find()
         .populate("name", "category")
@@ -18,7 +20,7 @@ router.get('/', async (req, res) => {
     res.send(productList);
 });
 
-
+// Get Data By id
 router.get('/:id', async (req, res) => {
     const product = await Products.findById(req.params.id);
     if (!product) {
@@ -28,7 +30,30 @@ router.get('/:id', async (req, res) => {
 });
 
 
+// Image folder
+const imageStorage = multer.diskStorage({
+    destination: "images/products",
+    filename: (req, file, cb) => {
+        cb(
+            null,
+            file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+        );
+    },
+});
 
+// Image upload
+const imageUpload = multer({
+    storage: imageStorage,
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png|jpg)$/)) {
+            return cb(new Error("Please upload a Image"));
+        }
+        cb(undefined, true);
+    },
+});
+
+
+// insert data
 router.post('/', async (req, res) => {
     const category = await Category.findById(req.body.category);
     if (!category) return res.status(400).send("Invalid Category");
@@ -37,7 +62,7 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         description: req.body.description,
         richdescription: req.body.richdescription,
-        image: "ImagePath",
+        image: imageUpload.single("image"),
         images: "ImagesPath",
         brand: req.body.brand,
         price: req.body.price,
@@ -55,6 +80,8 @@ router.post('/', async (req, res) => {
 
 });
 
+
+// Update Data
 router.put('/:id', async (req, res) => {
     const product = await Products.findByIdAndUpdate(req.params.id,
         {
@@ -77,6 +104,7 @@ router.put('/:id', async (req, res) => {
     res.send(product);
 });
 
+// Delete Data
 router.delete('/:id', async (req, res) => {
 
     const product = await Products.findByIdAndRemove(req.params.id);

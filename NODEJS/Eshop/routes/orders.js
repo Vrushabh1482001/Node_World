@@ -8,6 +8,8 @@ const Orderitem = require("../Models/orderitemsModel");
 router.use(express.json());
 router.use(express.urlencoded());
 
+
+// Get Data
 router.get('/', async (req, res) => {
     const orderList = await Orders.find()
         .populate("user", "name")
@@ -18,6 +20,7 @@ router.get('/', async (req, res) => {
     res.send(orderList);
 });
 
+// Get Data By Id
 router.get('/byid/:id', async (req, res) => {
     const order = await Orders.findById(req.params.id)
         .populate("user", "name")
@@ -34,7 +37,7 @@ router.get('/byid/:id', async (req, res) => {
     res.status(200).send(order);
 });
 
-
+// Insert Data
 router.post("/", async (req, res) => {
     const orderItemsIds = Promise.all(
         req.body.orderitems.map(async (orderitem) => {
@@ -80,6 +83,8 @@ router.post("/", async (req, res) => {
     res.status(200).send(order);
 });
 
+
+// Update Data
 router.put('/:id', async (req, res) => {
     const order = await Orders.findByIdAndUpdate(req.params.id,
         {
@@ -101,6 +106,7 @@ router.put('/:id', async (req, res) => {
     res.send(order);
 });
 
+// Delete Data
 router.delete('/:id', async (req, res) => {
 
     const order = await Orders.findByIdAndRemove(req.params.id);

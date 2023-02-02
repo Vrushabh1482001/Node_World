@@ -7,7 +7,7 @@ router.use(express.json());
 router.use(express.urlencoded());
 const bcrypt = require('bcrypt');
 
-
+// Get Data 
 router.get('/', async (req, res) => {
     const userList = await Users.find()
         .populate("name")
@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
     res.send(userList);
 });
 
+//Get Data By Id
 router.get('/:id', async (req, res) => {
     const user = await Users.findById(req.params.id);
     if (!user) {
@@ -26,6 +27,7 @@ router.get('/:id', async (req, res) => {
     res.status(200).send(user);
 });
 
+//login
 router.post("/login", async (req, res) => {
     const user = await Users.findOne({ email: req.body.email });
     const secret = process.env.SECRET;
@@ -47,6 +49,8 @@ router.post("/login", async (req, res) => {
     }
 });
 
+
+// Register
 router.post('/register', async (req, res) => {
 
     let user = new Users({
@@ -68,7 +72,7 @@ router.post('/register', async (req, res) => {
 
 });
 
-
+//Update Data
 router.put('/:id', async (req, res) => {
     const user = await Users.findByIdAndUpdate(req.params.id,
         {
@@ -90,6 +94,7 @@ router.put('/:id', async (req, res) => {
     res.send(user);
 });
 
+// Delete Data
 router.delete('/:id', async (req, res) => {
 
     const user = await Users.findByIdAndRemove(req.params.id);

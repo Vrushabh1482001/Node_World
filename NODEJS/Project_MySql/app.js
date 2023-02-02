@@ -28,7 +28,7 @@ const connection = mysql.createConnection({
     // database: "Vrushabh",
     // host: "localhost",
     // user: "root",
-    // database: "Vrushabh",
+    database: "Vrushabh",
     port: 3306
 });
 connection.connect(function (error) {
@@ -39,35 +39,10 @@ connection.connect(function (error) {
     }
 });
 
-// // getdata
-// app.use('/getusers', require('./routes/users'));
-// app.use('/getcategory', require('./routes/category'));
-// app.use('/getproducts', require('./routes/products'));
-// app.use('/getorders', require('./routes/orders'));
 
-// //Postdata
-// app.use('/postusers', require('./routes/users'));
-// app.use('/postcategory', require('./routes/category'));
-// app.use('/postproducts', require('./routes/products'));
-// app.use('/postorders', require('./routes/orders'));
+app.use("/users", require("./routes/users"));
 
 
-// //updatedata
-// app.use('/updateusers', require('./routes/users'));
-// app.use('/updatecategory', require('./routes/category'));
-// app.use('/updateproducts', require('./routes/products'));
-// app.use('/updateorders', require('./routes/orders'));
-
-
-// //deletedata
-// app.use('/deleteusers', require('./routes/users'));
-// app.use('/deletecategory', require('./routes/category'));
-// app.use('/deleteproducts', require('./routes/products'));
-// app.use('/deleteorders', require('./routes/orders'));
-
-
-// // login
-// app.use('/user', require('./routes/users'));
 
 //server Listen
 app.listen(PORT, () => {
