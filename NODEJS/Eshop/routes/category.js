@@ -57,7 +57,7 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         color: req.body.color,
         icon: req.body.icon,
-        image: imageUpload.single("image")
+        image: imageUpload.single("image");
     });
 
     category = await category.save();
@@ -74,7 +74,7 @@ router.put('/:id', async (req, res) => {
             name: req.body.name,
             color: req.body.color,
             icon: req.body.icon,
-            image: req.body.image
+            image: imageUpload.single("image")
 
         }, { new: true });
 

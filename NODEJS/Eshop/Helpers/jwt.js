@@ -12,7 +12,11 @@ const authJwt = () => {
             path:
                 [
                     "/users/login",
-                    "/users/register"
+                    "/users/register",
+                    "/products",
+                    "/category",
+                    "orders"
+
                 ]
         });
 

@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 // Authentication 
-app.use(authJwt());
+// app.use(authJwt());
 app.use(errorHandler);
 
 //Default
