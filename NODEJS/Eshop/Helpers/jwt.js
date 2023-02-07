@@ -15,7 +15,7 @@ const authJwt = () => {
                     "/users/register",
                     "/products",
                     "/category",
-                    "orders"
+                    "/orders"
 
                 ]
         });
