@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 // Authentication 
-// app.use(authJwt());
+app.use(authJwt());
 app.use(errorHandler);
 
 //Default
@@ -35,7 +35,7 @@ const connection = mysql.createConnection({
     database: "Vrushabh",
     port: 3306
 });
-connection.connect(function (error) {
+connection.connect((error) => {
     if (error) {
         console.log(error)
     } else {
