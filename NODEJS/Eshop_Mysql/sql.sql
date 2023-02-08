@@ -4,7 +4,7 @@ use Vrushabh;
 
 -- //users
 
-create table Users(id int primary key AUTO_INCREMENT,
+create table Users(id int NOT NULL AUTO_INCREMENT,
     name varchar(30),
     email varchar(30),
     passwordHash varchar(15),
@@ -15,12 +15,13 @@ create table Users(id int primary key AUTO_INCREMENT,
     country varchar(30),
     phone numeric(10),
     isAdmin Boolean,
-    constraint PK_Users
+    CONSTRAINT PK_Users PRIMARY KEY(id) 
 );
+
 
 -- //produts
 
-create table  Products(id int primary key AUTO_INCREMENT,
+create table  Products(id int NOT NULL AUTO_INCREMENT,
     name varchar(30),
     description varchar(300),
     richdescription varchar(300),
@@ -33,6 +34,7 @@ create table  Products(id int primary key AUTO_INCREMENT,
     ratin int,
     isFeatured Boolean,
     dateCreated datetime,
+    CONSTRAINT PK_Products PRIMARY KEY(id) 
     CONSTRAINT FK_Category foreign key(category) references Category(id)
 );
 
